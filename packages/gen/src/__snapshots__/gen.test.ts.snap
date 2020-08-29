@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 1`] = `
+"import { InputFieldProps } from \\"@omega/runtime\\";
+import React, { useState, useEffect } from \\"react\\";
+import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
+import { FieldMap, Field } from \\"@omega/core\\";
+import {
+  createValidator,
+  testCondRoot,
+  InputFieldComponent,
+} from \\"@omega/runtime\\";
+
+/* Form value type */
+export type FieldValueTypes = {
+  name: string;
+  age: number;
+};
+
+/* export const fieldMap: FieldMap = ... */
+export const fieldMap: FieldMap = new Map<string, Field>([
+  [
+    \\"name\\",
+    {
+      field_id: \\"name\\",
+      label: \\"Name\\",
+      type: \\"text\\",
+    },
+  ],
+  [
+    \\"age\\",
+    {
+      field_id: \\"age\\",
+      label: \\"Age\\",
+      type: \\"number\\",
+    },
+  ],
+]);
+
+/* Component function for \\"name\\" */
+export const NameFieldComponent: React.FC<InputFieldProps> = (props) => {
+  return <InputFieldComponent {...props} />;
+};
+
+/* Component function for \\"age\\" */
+export const AgeFieldComponent: React.FC<InputFieldProps> = (props) => {
+  return <InputFieldComponent {...props} />;
+};
+
+/* Form component */
+export type FormComponentProps = Omit<
+  FormikConfig<FieldValueTypes>,
+  \\"initialValues\\"
+>;
+export const FormComponent: React.FC<FormComponentProps> = ({
+  children,
+  ...props
+}) => (
+  <Formik
+    validate={createValidator(fieldMap)}
+    initialValues={
+      {
+        name: \\"\\",
+        age: \\"\\",
+      } as any
+    }
+    {...props}
+  >
+    <Form className=\\"omega-form\\">
+      <div className=\\"omega-form__fields\\">
+        {children}
+        <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
+        <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
+      </div>
+      <div className=\\"omega-form__buttons\\">
+        <button className=\\"omega-form__button \\" type=\\"submit\\">
+          Cancel
+        </button>
+        <button
+          className=\\"omega-form__button omega-form__button--primary\\"
+          type=\\"submit\\"
+        >
+          Submit
+        </button>
+      </div>
+    </Form>
+  </Formik>
+);
+"
+`;
+
+exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 2`] = `
+"import { InputFieldProps } from \\"@omega/runtime\\";
+import React, { useState, useEffect } from \\"react\\";
+import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
+import { FieldMap, Field } from \\"@omega/core\\";
+import {
+  createValidator,
+  testCondRoot,
+  InputFieldComponent,
+} from \\"@omega/runtime\\";
+
+/* Form value type */
+export type FieldValueTypes = {
+  name: string;
+  age: number;
+};
+
+/* export const fieldMap: FieldMap = ... */
+export const fieldMap: FieldMap = new Map<string, Field>([
+  [
+    \\"name\\",
+    {
+      field_id: \\"name\\",
+      label: \\"Name\\",
+      type: \\"text\\",
+      valid_if: {
+        $required: true,
+      },
+    },
+  ],
+  [
+    \\"age\\",
+    {
+      field_id: \\"age\\",
+      label: \\"Age\\",
+      type: \\"number\\",
+      valid_if: {
+        $required: true,
+      },
+      shown_if: {
+        name: {
+          $required: true,
+        },
+      },
+      disabled_if: {
+        name: {
+          $required: true,
+        },
+      },
+    },
+  ],
+]);
+
+/* Component function for \\"name\\" */
+export const NameFieldComponent: React.FC<InputFieldProps> = (props) => {
+  return <InputFieldComponent required {...props} />;
+};
+
+/* Component function for \\"age\\" */
+export const AgeFieldComponent: React.FC<InputFieldProps> = (props) => {
+  const { values, touched } = useFormikContext<FieldValueTypes>();
+  /* shown_if */
+
+  const [shown, setShown] = useState(
+    testCondRoot(fieldMap.get(\\"age\\")!.shown_if!, values, fieldMap)
+  );
+  useEffect(
+    () =>
+      setShown(testCondRoot(fieldMap.get(\\"age\\")!.shown_if!, values, fieldMap)),
+    [values.name, touched.name]
+  );
+  /* disabled_if */
+
+  const [disabled, setDisabled] = useState(
+    testCondRoot(fieldMap.get(\\"age\\")!.disabled_if!, values, fieldMap)
+  );
+  useEffect(
+    () =>
+      setShown(
+        testCondRoot(fieldMap.get(\\"age\\")!.disabled_if!, values, fieldMap)
+      ),
+    [values.name, touched.name]
+  );
+  if (!shown) return <></>;
+  return <InputFieldComponent disabled={disabled} required {...props} />;
+};
+
+/* Form component */
+export type FormComponentProps = Omit<
+  FormikConfig<FieldValueTypes>,
+  \\"initialValues\\"
+>;
+export const FormComponent: React.FC<FormComponentProps> = ({
+  children,
+  ...props
+}) => (
+  <Formik
+    validate={createValidator(fieldMap)}
+    initialValues={
+      {
+        name: \\"\\",
+        age: \\"\\",
+      } as any
+    }
+    {...props}
+  >
+    <Form className=\\"omega-form\\">
+      <div className=\\"omega-form__fields\\">
+        {children}
+        <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
+        <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
+      </div>
+      <div className=\\"omega-form__buttons\\">
+        <button className=\\"omega-form__button \\" type=\\"submit\\">
+          Cancel
+        </button>
+        <button
+          className=\\"omega-form__button omega-form__button--primary\\"
+          type=\\"submit\\"
+        >
+          Submit
+        </button>
+      </div>
+    </Form>
+  </Formik>
+);
+"
+`;

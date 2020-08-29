@@ -1,0 +1,26 @@
+{
+  "name": "@omega/core",
+  "version": "0.0.1",
+  "main": "dist/index",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bin": {
+    "omega": "../gen/bin/omega.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "pascal-case": "^3.1.1",
+    "yup": "^0.29.3"
+  },
+  "scripts": {
+    "dev:update-snapshot": "jest --updateSnapshot",
+    "clean": "rimraf -rf dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "build": "run-s clean compile",
+    "test": "jest"
+  }
+}

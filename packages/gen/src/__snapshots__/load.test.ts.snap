@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`load.ts cannot load error schema 1`] = `
+"app_error.yml has the above error(s).
+
+- is not one of enum values: checkbox,date,email,number,text,url,uuid
+- is not of a type(s) string
+- is not any of [subschema 0],[subschema 1],[subschema 2],<#/definitions/Partial<{$and:Cond;$or:Cond;$not:Cond;}>>"
+`;
+
+exports[`load.ts loads "app_complex.yml" 1`] = `
+Object {
+  "application_id": "user",
+  "fields": Array [
+    Object {
+      "field_id": "name",
+      "label": "Name",
+      "type": "text",
+      "valid_if": Object {
+        "$required": true,
+      },
+    },
+    Object {
+      "field_id": "age",
+      "label": "Age",
+      "shown_if": Object {
+        "name": Object {
+          "$gt": 10,
+          "$lte": 100,
+          "$required": true,
+        },
+      },
+      "type": "number",
+    },
+  ],
+  "label": "User",
+  "version": 1,
+}
+`;
+
+exports[`load.ts loads "app_simple.yml" 1`] = `
+Object {
+  "application_id": "text",
+  "fields": Array [
+    Object {
+      "field_id": "title",
+      "label": "Title",
+      "type": "text",
+    },
+  ],
+  "label": "Text",
+  "version": 1,
+}
+`;

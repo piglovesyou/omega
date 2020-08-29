@@ -1,0 +1,30 @@
+node_modules/
+__generated__
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editors and IDEs
+.idea
+graphql-let.iml
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Misc
+.DS_Store
+dist
+*.tgz
+_*.js
+_*.json
+_*.ts
+
+# I'll update deps by dependabot
+
+yarn.lock
+packages/*/src/**/*.js
+packages/*/src/**/*.jsx

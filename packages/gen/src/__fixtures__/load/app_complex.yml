@@ -1,0 +1,18 @@
+application_id: user
+label: User
+version: 1
+fields:
+    - field_id: name
+      label: Name
+      type: text
+      valid_if:
+          $required: true
+
+    - field_id: age
+      label: Age
+      type: number
+      shown_if:
+          name:
+              $required: true
+              $gt: 10
+              $lte: 100

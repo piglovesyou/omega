@@ -1,0 +1,47 @@
+@tailwind base;
+
+/* Write your own custom base styles here */
+
+/* Start purging... */
+/* User side style */
+@tailwind components;
+h1 { @apply text-3xl mb-5; }
+a[href] { @apply text-blue-600 }
+a[href]:hover { @apply text-blue-700 underline }
+.my-form { @apply my-16 mx-16 max-w-lg }
+@screen sm { .my-form { @apply mx-auto } }
+.my-trailing-text { @apply text-gray-600; }
+.omega-form { @apply mb-40; }
+
+/* Library side style */
+.omega-form__fields { @apply grid grid-cols-1 }
+.omega-field { @apply mb-5 }
+.omega-field--required label span::after { content: '＊'; @apply text-red-600 text-xs align-top;}
+.omega-field input { @apply px-1 border-gray-900 border border-solid rounded-sm; }
+.omega-field input::placeholder { @apply text-gray-600; }
+.omega-field__input input { @apply  mr-1 align-middle; }
+.omega-field__input input:not([type="checkbox"]) { @apply w-full  }
+.omega-field__supplemental-text { @apply inline-block text-xs text-gray-600; }
+.omega-field__message { @apply text-red-600 ; }
+@screen sm {
+    .omega-field { @apply flex }
+    .omega-field label { @apply w-24 items-center; }
+    .omega-field__input { @apply flex-1; }
+    .omega-field__input input:not([type="checkbox"]) { @apply w-auto  }
+}
+
+.omega-form__buttons { @apply flex justify-end }
+.omega-form__buttons > * { @apply ml-2 }
+.omega-form__button { @apply bg-gray-600 text-white px-2 rounded border-gray-600 border border-solid; }
+.omega-form__button:hover { @apply bg-gray-700 border-gray-700; }
+.omega-form__button--primary { @apply bg-blue-600 border-blue-600; }
+.omega-form__button--primary:hover { @apply bg-blue-700 border-blue-700; }
+/* Stop purging. */
+
+/* Write you own custom component styles here */
+
+/* Start purging... */
+@tailwind utilities;
+/* Stop purging. */
+
+/* Your own custom utilities */

@@ -1,0 +1,9 @@
+application_id: errorschema
+label: Error Schema
+version: 1
+fields:
+    - field_id: title
+      label: Title
+      type: 1
+      shown_if:
+          x: boom

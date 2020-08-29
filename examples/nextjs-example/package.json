@@ -1,0 +1,29 @@
+{
+  "name": "nextjs-example",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@omega/runtime": ">=0.0.1-alpha",
+    "next": "latest",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.21",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "@omega/gen": ">=0.0.1-alpha",
+    "postcss-flexbugs-fixes": "^4.2.1",
+    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "^1.8.9",
+    "typescript": "4.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "gen": "omega schema/**",
+    "dev": "next",
+    "build": "yarn gen && next build",
+    "start": "next start",
+    "lint": "tsc"
+  }
+}

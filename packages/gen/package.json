@@ -1,0 +1,38 @@
+{
+  "name": "@omega/gen",
+  "version": "0.0.1",
+  "main": "src/index",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "bin": {
+    "omega": "bin/omega.js"
+  },
+  "dependencies": {
+    "@babel/generator": "^7.11.6",
+    "@babel/parser": "^7.11.5",
+    "@babel/types": "^7.11.5",
+    "@omega/core": "^0.0.1-alpha",
+    "jsonschema": "^1.2.6",
+    "log-update": "^4.0.0",
+    "make-dir": "^3.1.0",
+    "pascal-case": "^3.1.1",
+    "prettier": "^2.1.1",
+    "string-env-interpolation": "^1.0.1",
+    "yaml": "^1.10.0",
+    "yargs": "^16.0.3"
+  },
+  "scripts": {
+    "dev:gen-assets": "node --require ts-node/register/transpile-only scripts/gen-assets.ts",
+    "dev:update-snapshot": "jest --updateSnapshot",
+    "clean": "rimraf -rf dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "build": "run-s clean compile",
+    "test": "jest"
+  }
+}

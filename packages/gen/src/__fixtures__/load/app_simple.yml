@@ -1,0 +1,7 @@
+application_id: text
+label: Text
+version: 1
+fields:
+    - field_id: title
+      label: Title
+      type: text
