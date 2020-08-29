@@ -1,0 +1,9 @@
+{
+  "name": "omega",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "Soichi Takamura<thepiglovesyou@gmail.com>",
+  "license": "MIT"
+}
