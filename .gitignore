@@ -28,3 +28,6 @@ _*.ts
 yarn.lock
 packages/*/src/**/*.js
 packages/*/src/**/*.jsx
+
+# Generated assets to include in the package
+__assets__

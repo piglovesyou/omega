@@ -572,11 +572,9 @@ export function genForm(schema: Application) {
                       label="${label}"
               />`;
             })
-            .join('')
-          }
+            .join('')}
         </div>
         <div className="omega-form__buttons">
-          <button className="omega-form__button " type="submit">Cancel</button>
           <button className="omega-form__button omega-form__button--primary" type="submit">Submit</button>
         </div>
       </Form>

@@ -73,9 +73,6 @@ export const FormComponent: React.FC<FormComponentProps> = ({
         <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
       </div>
       <div className=\\"omega-form__buttons\\">
-        <button className=\\"omega-form__button \\" type=\\"submit\\">
-          Cancel
-        </button>
         <button
           className=\\"omega-form__button omega-form__button--primary\\"
           type=\\"submit\\"
@@ -202,9 +199,6 @@ export const FormComponent: React.FC<FormComponentProps> = ({
         <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
       </div>
       <div className=\\"omega-form__buttons\\">
-        <button className=\\"omega-form__button \\" type=\\"submit\\">
-          Cancel
-        </button>
         <button
           className=\\"omega-form__button omega-form__button--primary\\"
           type=\\"submit\\"

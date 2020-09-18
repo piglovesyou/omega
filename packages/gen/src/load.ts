@@ -1,9 +1,8 @@
-import { Application, CondRoot } from '@omega/core';
+import { Application, ApplicationJSONSchema, CondRoot } from '@omega/core';
 import { Validator } from 'jsonschema';
 import { join } from 'path';
 import { env } from 'string-env-interpolation';
 import { parse as parseYaml } from 'yaml';
-import ApplicationJSONSchema from './__assets__/application.json';
 import { readFile } from './lib/file';
 import { printError } from './lib/print';
 

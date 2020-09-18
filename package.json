@@ -21,7 +21,7 @@
     }
   },
   "lint-staged": {
-    "**/*.ts?(x)": [
+    "**/*.{ts,tsx}": [
       "yarn fix-js",
       "git add --force"
     ],
@@ -73,7 +73,7 @@
     "fix-nonjs": "yarn lint-nonjs --write",
     "fix": "yarn fix-js && yarn fix-nonjs '**/*.{md,yml,graphql,graphqls}'",
     "gen": "lerna run gen",
-    "compile": "lerna run --no-private --parallel compile",
+    "compile": "lerna run --no-private compile",
     "build": "lerna run --no-private build",
     "test": "lerna run --no-private --parallel test",
     "prepublishOnly": "run-s lint build test"

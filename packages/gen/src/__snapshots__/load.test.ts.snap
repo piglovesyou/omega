@@ -3,9 +3,7 @@
 exports[`load.ts cannot load error schema 1`] = `
 "app_error.yml has the above error(s).
 
-- is not one of enum values: checkbox,date,email,number,text,url,uuid
-- is not of a type(s) string
-- is not any of [subschema 0],[subschema 1],[subschema 2],<#/definitions/Partial<{$and:Cond;$or:Cond;$not:Cond;}>>"
+- is not any of <#/definitions/InputField>,<#/definitions/SelectField>"
 `;
 
 exports[`load.ts loads "app_complex.yml" 1`] = `

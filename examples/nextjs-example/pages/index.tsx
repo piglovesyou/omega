@@ -20,8 +20,8 @@ export default function Application() {
       <hr />
       <p className="my-trailing-text">
         This is a demonstration of{' '}
-        <a href="https://github.com/piglovesyou/omega">omega</a>, a toolset
-        that generates web application source from{' '}
+        <a href="https://github.com/piglovesyou/omega">omega</a>, a toolset that
+        generates web application source from{' '}
         <a href="https://github.com/piglovesyou/omega/blob/master/examples/nextjs-example/schema/my-app.yml">
           a yaml
         </a>

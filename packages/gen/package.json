@@ -28,7 +28,6 @@
     "yargs": "^16.0.3"
   },
   "scripts": {
-    "dev:gen-assets": "node --require ts-node/register/transpile-only scripts/gen-assets.ts",
     "dev:update-snapshot": "jest --updateSnapshot",
     "clean": "rimraf -rf dist",
     "compile": "tsc -p tsconfig.build.json",
