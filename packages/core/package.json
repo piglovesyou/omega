@@ -10,7 +10,8 @@
     "omega": "../gen/bin/omega.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "dist/__assets__"
   ],
   "dependencies": {
     "pascal-case": "^3.1.1",

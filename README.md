@@ -68,7 +68,7 @@ as a documentation.
 
 -   [x] Command generates `.tsx`
 -   [x] Validation by `valid_if`
--   [x] Dependant fields by `shwon_if`, `disabled_if`
+-   [x] Dependant fields by `shown_if`, `disabled_if`
 -   Field types
     -   [x] text
     -   [x] number
@@ -76,8 +76,10 @@ as a documentation.
     -   [x] email
     -   [x] url
     -   [x] date
-    -   [ ] select
+    -   [x] select
     -   [ ] radio
+    -   [ ] textarea
+    -   [ ] multiple values of the primitive types
     -   [ ] select value from another applications
         -   [ ] filter, sort, aggregate
 

@@ -3,14 +3,15 @@ import {
   tsNumberKeyword,
   tsBooleanKeyword,
 } from '@babel/types';
-import { FieldTypes } from '@omega/core';
+import { AllowedFieldTypes } from '@omega/core';
 
-export function getFieldType(type: FieldTypes) {
+export function getFieldType(type: AllowedFieldTypes) {
   switch (type) {
     case 'text':
     case 'email':
     case 'url':
     case 'uuid':
+    case 'select':
       return tsStringKeyword();
     case 'number':
       return tsNumberKeyword();
@@ -19,6 +20,6 @@ export function getFieldType(type: FieldTypes) {
     case 'date':
       return tsStringKeyword();
     default:
-      throw new Error(`${type} is not a valid field.type.`);
+      throw new Error(`Never: ${type} is not a valid field.type.`);
   }
 }

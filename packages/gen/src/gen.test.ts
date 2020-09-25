@@ -9,6 +9,16 @@ const cases: Application[] = [
     fields: [
       { field_id: 'name', label: 'Name', type: 'text' },
       { field_id: 'age', label: 'Age', type: 'number' },
+      // {
+      //   field_id: 'sex',
+      //   label: 'Sex',
+      //   type: 'select',
+      //   options: {
+      //     male: 'Male',
+      //     female: 'Female',
+      //     na: 'N/A',
+      //   },
+      // },
     ],
   },
   {

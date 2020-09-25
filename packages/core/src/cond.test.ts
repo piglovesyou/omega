@@ -1,6 +1,6 @@
 import { validateCond } from './cond';
 import { Cond } from './types/cond';
-import { FieldTypes } from './types/field';
+import { AllowedFieldTypes } from './types/field';
 
 const testTypes = [
   'text',
@@ -59,7 +59,7 @@ test.each(cases)('testCond %p, %p, %o', (type, value, cond) => {
   const errorMessages: string[] = [];
   try {
     const isValid = validateCond(
-      type as FieldTypes,
+      type as AllowedFieldTypes,
       value,
       cond,
       errorMessages,

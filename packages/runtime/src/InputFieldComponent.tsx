@@ -6,7 +6,13 @@ export type InputFieldProps = {
   required?: boolean;
   supplementalText?: string;
 } & InputHTMLAttributes<HTMLInputElement>;
-export const InputFieldComponent: React.FC<InputFieldProps> = ({
+export const InputFieldComponent: React.FC<
+  {
+    component: 'input' | 'select';
+  } & InputFieldProps
+> = ({
+  component,
+  children,
   label,
   required,
   supplementalText,
@@ -24,7 +30,15 @@ export const InputFieldComponent: React.FC<InputFieldProps> = ({
         <span>{label}</span>
       </label>
       <div className={`omega-field__input`}>
-        <input {...attributes} {...field} id={name} />
+        {React.createElement(
+          component,
+          {
+            ...attributes,
+            ...field,
+            id: name,
+          },
+          children,
+        )}
         {supplementalText && (
           <div className={`omega-field__supplemental-text`}>
             {supplementalText}

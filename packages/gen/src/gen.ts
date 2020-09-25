@@ -1,4 +1,4 @@
-import { Application, validateCond } from '@omega/core';
+import { Application, Field, SelectField, validateCond } from '@omega/core';
 import { getFieldType } from './ast/field';
 import { program } from '@babel/types';
 import { parseExpression, ParserOptions } from '@babel/parser';
@@ -10,6 +10,58 @@ const parserOpts: ParserOptions = { plugins: ['typescript', 'jsx'] };
 
 function expr(expression: string) {
   return parseExpression(expression, parserOpts);
+}
+
+function getComponentName(fieldId: string) {
+  return `${pascalCase(fieldId)}FieldComponent`;
+}
+
+function genInnerComponent(field: Field) {
+  const {
+    type,
+    disabled_if,
+    supplemental_text,
+    placeholder_text,
+    valid_if,
+  } = field;
+  const attributeStrs: string[] = [];
+
+  if (disabled_if) attributeStrs.push(`disabled={disabled}`);
+  if (valid_if && !validateCond(type, '', valid_if)) {
+    attributeStrs.push(`required`);
+  }
+  if (supplemental_text)
+    attributeStrs.push(`supplementalText="${supplemental_text}"`);
+  if (placeholder_text) attributeStrs.push(`placeholder="${placeholder_text}"`);
+  attributeStrs.push(`{...props}`);
+
+  switch (type) {
+    case 'date':
+    case 'checkbox':
+    case 'number':
+    case 'uuid':
+    case 'text':
+    case 'email':
+    case 'url':
+      return `<InputFieldComponent component="input" ${attributeStrs.join(
+        '\n',
+      )} />`;
+    case 'select':
+      return `<InputFieldComponent
+                    component="select"
+                    ${attributeStrs.join('\n')}
+              >
+                    ${Array.from(Object.entries((field as SelectField).options))
+                      .map(
+                        ([value, label]) =>
+                          `<option value="${value}">${label}</option>`,
+                      )
+                      .join('\n')}
+                  </InputFieldComponent>
+    `;
+    default:
+      throw new Error(`Never: ${type} is not valid field.type.`);
+  }
 }
 
 export function genForm(schema: Application) {
@@ -311,8 +363,7 @@ export function genForm(schema: Application) {
     // export const AgeField: React.FC<InputFieldProps> = (props) => {
     ...fields.map((field) => {
       const { field_id, shown_if, disabled_if } = field;
-      const componentName = `${pascalCase(field.field_id)}FieldComponent`;
-      (field as any).__componentName = componentName;
+      const componentName = getComponentName(field_id);
 
       return {
         leadingComments: [
@@ -400,7 +451,7 @@ export function genForm(schema: Application) {
       testCondRoot(fieldMap.get('${field_id}')!.disabled_if!, values, fieldMap),
     );
     useEffect(
-      () => setShown(testCondRoot(fieldMap.get('${field_id}')!.disabled_if!, values, fieldMap)),
+      () => setDisabled(testCondRoot(fieldMap.get('${field_id}')!.disabled_if!, values, fieldMap)),
       [ ${Object.keys(disabled_if)
         .map(
           (dependeeFieldId) =>
@@ -414,25 +465,7 @@ export function genForm(schema: Application) {
 
   ${shown_if ? `if (!shown) return <></>;` : ''}
   
-  return <InputFieldComponent ${disabled_if ? `disabled={disabled}` : ''}
-                     ${
-                       field.supplemental_text
-                         ? `supplementalText="${field.supplemental_text}"`
-                         : ''
-                     }
-                     ${
-                       field.placeholder_text
-                         ? `placeholder="${field.placeholder_text}"`
-                         : ''
-                     }
-                     ${
-                       (field.valid_if &&
-                         !validateCond(field.type, '', field.valid_if) &&
-                         'required') ||
-                       ''
-                     }
-                     {...props}
-  />;
+  return ${genInnerComponent(field)};
 }
 
 `),
@@ -566,7 +599,7 @@ export function genForm(schema: Application) {
           ${fields
             .map((field) => {
               const { field_id, type, label } = field;
-              return `<${(field as any).__componentName}
+              return `<${getComponentName(field_id)}
                       name="${field_id}"
                       type="${type}"
                       label="${label}"

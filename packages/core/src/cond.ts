@@ -1,9 +1,9 @@
 import { MixedSchema, Schema, ValidationError } from 'yup';
 import * as yup from 'yup';
 import { Cond, CondForTypes, MixedCond, NestCond } from './types/cond';
-import { FieldTypes } from './types/field';
+import { AllowedFieldTypes } from './types/field';
 
-function getValid(type: FieldTypes) {
+function getValid(type: AllowedFieldTypes) {
   switch (type) {
     case 'text':
     case 'email':
@@ -37,7 +37,7 @@ function validate(valid: Schema<any>, val: any, messages: string[]): boolean {
 }
 
 function validateCondRecur(
-  type: FieldTypes,
+  type: AllowedFieldTypes,
   val: any,
   conds: Cond,
   messages: string[],
@@ -130,7 +130,7 @@ function validateCondRecur(
 }
 
 export function validateCond(
-  type: FieldTypes,
+  type: AllowedFieldTypes,
   val: any,
   cond: Cond,
   messages: string[] = [],

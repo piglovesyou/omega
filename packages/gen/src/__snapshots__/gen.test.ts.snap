@@ -39,12 +39,12 @@ export const fieldMap: FieldMap = new Map<string, Field>([
 
 /* Component function for \\"name\\" */
 export const NameFieldComponent: React.FC<InputFieldProps> = (props) => {
-  return <InputFieldComponent {...props} />;
+  return <InputFieldComponent component=\\"input\\" {...props} />;
 };
 
 /* Component function for \\"age\\" */
 export const AgeFieldComponent: React.FC<InputFieldProps> = (props) => {
-  return <InputFieldComponent {...props} />;
+  return <InputFieldComponent component=\\"input\\" {...props} />;
 };
 
 /* Form component */
@@ -141,7 +141,7 @@ export const fieldMap: FieldMap = new Map<string, Field>([
 
 /* Component function for \\"name\\" */
 export const NameFieldComponent: React.FC<InputFieldProps> = (props) => {
-  return <InputFieldComponent required {...props} />;
+  return <InputFieldComponent component=\\"input\\" required {...props} />;
 };
 
 /* Component function for \\"age\\" */
@@ -164,13 +164,20 @@ export const AgeFieldComponent: React.FC<InputFieldProps> = (props) => {
   );
   useEffect(
     () =>
-      setShown(
+      setDisabled(
         testCondRoot(fieldMap.get(\\"age\\")!.disabled_if!, values, fieldMap)
       ),
     [values.name, touched.name]
   );
   if (!shown) return <></>;
-  return <InputFieldComponent disabled={disabled} required {...props} />;
+  return (
+    <InputFieldComponent
+      component=\\"input\\"
+      disabled={disabled}
+      required
+      {...props}
+    />
+  );
 };
 
 /* Form component */
