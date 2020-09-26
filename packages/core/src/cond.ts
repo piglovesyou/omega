@@ -1,21 +1,58 @@
-import { MixedSchema, Schema, ValidationError } from 'yup';
 import * as yup from 'yup';
+import { MixedSchema, Schema, ValidationError } from 'yup';
 import { Cond, CondForTypes, MixedCond, NestCond } from './types/cond';
-import { AllowedFieldTypes } from './types/field';
+import { AllowedFieldTypes, AppendableOpts } from './types/field';
 
-function getValid(type: AllowedFieldTypes) {
+function wrapAsMulti(v: Schema<any>, multi: AppendableOpts) {
+  let m = yup.array();
+  if (typeof multi === 'object') {
+    if (multi.required) m = m.required();
+    if (multi.min) m = m.min(multi.min);
+    if (multi.max) m = m.max(multi.max);
+  }
+  return m.of(v);
+}
+
+function getValidatorForType(type: AllowedFieldTypes) {
   switch (type) {
     case 'text':
-    case 'email':
-    case 'url':
-    case 'uuid':
+    case 'tel':
+    case 'select':
+    case 'radio':
+    case 'textarea':
       return yup.string();
+
+    case 'color':
+      return yup.string().matches(/^#[0-9a-f]{6}$/);
+
+    case 'email':
+      return yup.string().email();
+
+    case 'uuid':
+      return yup.string().uuid();
+
+    case 'url':
+      return yup.string().url();
+
     case 'number':
+    case 'range':
       return yup.number();
+
     case 'checkbox':
       return yup.boolean();
+
+    // case 'week':
     case 'date':
+    case 'datetime-local':
       return yup.date();
+
+    case 'time':
+      return yup.string().matches(/^\d{2}:\d{2}$/);
+
+    case 'month':
+      // TODO: bettter validation?
+      return yup.string();
+
     default:
       throw new Error(`${type} is not a valid field.type.`);
   }
@@ -38,6 +75,7 @@ function validate(valid: Schema<any>, val: any, messages: string[]): boolean {
 
 function validateCondRecur(
   type: AllowedFieldTypes,
+  multi: AppendableOpts,
   val: any,
   conds: Cond,
   messages: string[],
@@ -49,7 +87,13 @@ function validateCondRecur(
   if ($and) {
     if (
       !Object.entries($and).every(([condK, condV]) => {
-        return validateCondRecur(type, val, { [condK]: condV }, messages);
+        return validateCondRecur(
+          type,
+          multi,
+          val,
+          { [condK]: condV },
+          messages,
+        );
       })
     )
       return false;
@@ -57,7 +101,13 @@ function validateCondRecur(
   if ($or) {
     if (
       !Object.entries($or).some(([condK, condV]) => {
-        return validateCondRecur(type, val, { [condK]: condV }, messages);
+        return validateCondRecur(
+          type,
+          multi,
+          val,
+          { [condK]: condV },
+          messages,
+        );
       })
     )
       return false;
@@ -65,7 +115,7 @@ function validateCondRecur(
   if ($not) {
     if (
       Object.entries($not).every(([condK, condV]) => {
-        return validateCondRecur(type, val, { [condK]: condV }, []); // $not should not load error messages
+        return validateCondRecur(type, multi, val, { [condK]: condV }, []); // $not should not load error messages
       })
     )
       return false;
@@ -80,14 +130,20 @@ function validateCondRecur(
     $required,
     ...typeConds
   } = mixedConds as Required<MixedCond>;
+
   let mixedValid: MixedSchema | null = null;
-  if ($in) mixedValid = (mixedValid || (mixedValid = yup.mixed())).oneOf($in);
-  if ($nin)
-    mixedValid = (mixedValid || (mixedValid = yup.mixed())).notOneOf($nin);
-  if ($eq) mixedValid = (mixedValid || (mixedValid = yup.mixed())).oneOf([$eq]);
-  if ($ne)
-    mixedValid = (mixedValid || (mixedValid = yup.mixed())).notOneOf([$ne]);
-  if (mixedValid && !validate(mixedValid, val, messages)) return false;
+  function ensureMixedValid() {
+    return mixedValid || (mixedValid = yup.mixed());
+  }
+
+  if ($in) mixedValid = ensureMixedValid().oneOf($in);
+  if ($nin) mixedValid = ensureMixedValid().notOneOf($nin);
+  if ($eq) mixedValid = ensureMixedValid().oneOf([$eq]);
+  if ($ne) mixedValid = ensureMixedValid().notOneOf([$ne]);
+  if (mixedValid) {
+    const schema = multi ? wrapAsMulti(mixedValid, multi) : mixedValid;
+    if (!validate(schema, val, messages)) return false;
+  }
 
   // Other conditions
   const {
@@ -101,50 +157,34 @@ function validateCondRecur(
   } = typeConds as Required<CondForTypes>;
   if (!isEmpty(unknownConds))
     throw new Error(`There are unknown keys ${Object.keys(unknownConds)}`);
-  let typeValid: Schema<any> | null = null;
-  if ($required) typeValid = (typeValid = getValid(type)).required();
-  if ($gt)
-    typeValid = (typeValid = getValid(type) as yup.NumberSchema).moreThan($gt);
-  if ($gte)
-    typeValid = ((typeValid || (typeValid = getValid(type))) as
-      | yup.StringSchema
-      | yup.NumberSchema
-      | yup.DateSchema).min($gte);
-  if ($lt)
-    typeValid = ((typeValid ||
-      (typeValid = getValid(type))) as yup.NumberSchema).lessThan($lt);
-  if ($lte)
-    typeValid = ((typeValid || (typeValid = getValid(type))) as
-      | yup.StringSchema
-      | yup.NumberSchema
-      | yup.DateSchema).max($lte);
-  if ($length)
-    typeValid = ((typeValid ||
-      (typeValid = getValid(type))) as yup.StringSchema).length($length);
-  if ($integer)
-    typeValid = ((typeValid ||
-      (typeValid = getValid(type))) as yup.NumberSchema).integer();
-  if (typeValid && !validate(typeValid, val, messages)) return false;
 
-  return true;
+  let valid = getValidatorForType(type);
+
+  if ($required) valid = valid.required();
+  if ($gt) valid = (valid as yup.NumberSchema).moreThan($gt);
+  if ($gte)
+    valid = (valid as yup.StringSchema | yup.NumberSchema | yup.DateSchema).min(
+      $gte,
+    );
+  if ($lt) valid = (valid as yup.NumberSchema).lessThan($lt);
+  if ($lte)
+    valid = (valid as yup.StringSchema | yup.NumberSchema | yup.DateSchema).max(
+      $lte,
+    );
+  if ($length) valid = (valid as yup.StringSchema).length($length);
+  if ($integer) valid = (valid as yup.NumberSchema).integer();
+
+  if (multi) return validate(wrapAsMulti(valid, multi), val, messages);
+  return validate(valid, val, messages);
 }
 
+// TODO: remove this function
 export function validateCond(
   type: AllowedFieldTypes,
+  multi: AppendableOpts,
   val: any,
   cond: Cond,
   messages: string[] = [],
 ): boolean {
-  if (!validate(getValid(type), val, messages)) return false;
-  return validateCondRecur(type, val, cond, messages);
+  return validateCondRecur(type, multi, val, cond, messages);
 }
-/*
-export function testCond(
-    type: FieldTypes,
-    val: any,
-    cond: Cond,
-): boolean {
-  if (!validate(getValid(type), val, [])) return false;
-  return validateCondRecur(type, val, cond, []);
-}
-*/

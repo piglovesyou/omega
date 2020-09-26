@@ -7,8 +7,9 @@ export function printInfo(message: string): void {
   console.info(PRINT_PREFIX + message);
 }
 
-export function printError(err: Error): void {
+export function printError(err: Error) {
   console.error(PRINT_PREFIX, inspect(err, { showHidden: false, depth: null }));
+  return err;
 }
 
 export function updateLog(message: string) {

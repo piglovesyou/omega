@@ -1,10 +1,21 @@
-import { Application, Field, SelectField, validateCond } from '@omega/core';
-import { getFieldType } from './ast/field';
-import { program } from '@babel/types';
-import { parseExpression, ParserOptions } from '@babel/parser';
 import generate from '@babel/generator';
-import { format } from 'prettier';
+import { parseExpression, ParserOptions } from '@babel/parser';
+import { program } from '@babel/types';
+import {
+  Application,
+  Field,
+  FieldAppendable,
+  HTMLCheckboxField,
+  HTMLRadioField,
+  HTMLSelectField,
+  HTMLTextboxLikeField,
+  TPrimitive,
+  validateCond,
+} from '@omega/core';
 import { pascalCase } from 'pascal-case';
+import { format } from 'prettier';
+import { getFieldValueType } from './ast/field';
+import { printError } from './lib/print';
 
 const parserOpts: ParserOptions = { plugins: ['typescript', 'jsx'] };
 
@@ -16,79 +27,223 @@ function getComponentName(fieldId: string) {
   return `${pascalCase(fieldId)}FieldComponent`;
 }
 
-function genInnerComponent(field: Field) {
-  const {
-    type,
-    disabled_if,
-    supplemental_text,
-    placeholder_text,
-    valid_if,
-  } = field;
-  const attributeStrs: string[] = [];
+function arr(n: number) {
+  return Array.from(Array(n));
+}
 
-  if (disabled_if) attributeStrs.push(`disabled={disabled}`);
-  if (valid_if && !validateCond(type, '', valid_if)) {
-    attributeStrs.push(`required`);
-  }
-  if (supplemental_text)
-    attributeStrs.push(`supplementalText="${supplemental_text}"`);
-  if (placeholder_text) attributeStrs.push(`placeholder="${placeholder_text}"`);
-  attributeStrs.push(`{...props}`);
+// function hasMin(field: Field): boolean {
+//   const { multi } = field as FieldAppendable;
+//   return typeof multi === 'object' && typeof multi.min === 'number';
+// }
 
+export function getInitialValue(field: Field) {
+  const { initial_value, type } = field;
+  const { multi } = field as FieldAppendable;
+
+  // "range" doesn't allow string initialization. XXX: Not sure it's the only exception.
+  let emptyValue: TPrimitive;
   switch (type) {
-    case 'date':
-    case 'checkbox':
-    case 'number':
-    case 'uuid':
+    case 'range':
+      emptyValue = 50;
+      break;
+    case 'color':
+      emptyValue = '#000000';
+      break;
+    default:
+      emptyValue = '';
+  }
+
+  if (initial_value === undefined) {
+    if (!multi) return emptyValue;
+    if (typeof multi === 'object' && typeof multi.min === 'number')
+      return arr(multi.min).map(() => emptyValue);
+    return [emptyValue];
+  }
+
+  if (Array.isArray(initial_value)) {
+    if (!multi)
+      throw printError(
+        new Error(
+          `"${field.field_id}" is wrongly configured. initial_value can be an array only when it is multi value field.`,
+        ),
+      );
+    if (typeof multi === 'object' && typeof multi.min === 'number') {
+      return arr(multi.min).map((_, i) => {
+        const initialValue = initial_value[i];
+        return initialValue !== undefined ? initialValue : emptyValue;
+      });
+    }
+    return initial_value;
+  }
+
+  if (!multi) return initial_value;
+  if (typeof multi === 'object' && typeof multi.min === 'number')
+    return arr(multi.min).map(() => initial_value);
+  return [initial_value];
+}
+
+function getInitialValues(fields: Field[]) {
+  return fields.reduce((acc, field) => {
+    const { field_id } = field;
+    return {
+      ...acc,
+      [field_id]: getInitialValue(field),
+    };
+  }, {} as Record<string, any>);
+}
+
+function genInputHTMLComponent(field: Field) {
+  const { type, disabled_if, supplemental_text, valid_if } = field;
+  const { placeholder_text } = field as HTMLTextboxLikeField;
+  const inputAttrs: string[] = [];
+  const fieldAttrs: string[] = [];
+
+  if (disabled_if) inputAttrs.push(`disabled={disabled}`);
+  if (placeholder_text) inputAttrs.push(`placeholder="${placeholder_text}"`);
+  if (
+    valid_if &&
+    !validateCond(type, (field as FieldAppendable).multi, '', valid_if)
+  )
+    fieldAttrs.push(`required`);
+  if (supplemental_text)
+    fieldAttrs.push(`supplementalText="${supplemental_text}"`);
+
+  fieldAttrs.push(`{...props}`);
+  inputAttrs.push(`{...props}`);
+
+  // const inputHTMLName = (field as FieldAppendable).multi
+  //   ? 'MultiInputHTML multi={(fieldMap.get(props.name) as FieldAppendable).multi}'
+  //   : 'SingleInputHTML';
+  const inputHTML = {
+    get open() {
+      return (field as FieldAppendable).multi
+        ? 'MultiInputHTML multi={(fieldMap.get(props.name) as FieldAppendable).multi}'
+        : 'SingleInputHTML';
+    },
+    get close() {
+      return (field as FieldAppendable).multi
+        ? 'MultiInputHTML'
+        : 'SingleInputHTML';
+    },
+  };
+
+  // TODO: refactor. "`<InputFieldComponent ${fieldAttrs.join('\n')}>" is always same
+  switch (type) {
     case 'text':
     case 'email':
     case 'url':
-      return `<InputFieldComponent component="input" ${attributeStrs.join(
+    case 'uuid':
+    case 'number':
+    case 'date':
+    case 'datetime-local':
+    case 'time':
+    case 'month':
+    case 'color':
+    case 'tel':
+    case 'range':
+      return `<InputFieldComponent ${fieldAttrs.join('\n')}>
+                <${inputHTML.open} component="input" ${inputAttrs.join('\n')} />
+              </InputFieldComponent>`;
+
+    case 'textarea':
+      return `<InputFieldComponent ${fieldAttrs.join('\n')}>
+                <${inputHTML.open} component="textarea" ${inputAttrs.join(
         '\n',
-      )} />`;
-    case 'select':
-      return `<InputFieldComponent
-                    component="select"
-                    ${attributeStrs.join('\n')}
-              >
-                    ${Array.from(Object.entries((field as SelectField).options))
-                      .map(
-                        ([value, label]) =>
-                          `<option value="${value}">${label}</option>`,
-                      )
-                      .join('\n')}
-                  </InputFieldComponent>
-    `;
+      )} />
+              </InputFieldComponent>`;
+
+    case 'checkbox': {
+      const { options, field_id } = field as HTMLCheckboxField;
+      if (!options) {
+        return `<InputFieldComponent ${fieldAttrs.join('\n')}>
+                  <SingleInputHTML component="input" ${inputAttrs.join('\n')} />
+                </InputFieldComponent>`;
+      }
+      const entries = Array.from(Object.entries(options));
+      return `<InputFieldComponent ${fieldAttrs.join('\n')}>
+                ${entries
+                  .map(([value, label]) => {
+                    // TODO: should be `${field_id}.${index}`
+                    return `
+                    <label>
+                        <SingleInputHTML component="input"
+                                         ${inputAttrs.join('\n')}
+                                         name="${field_id}.${value}"
+                        />
+                        <span>${label}</span>
+                    </label>
+                  `;
+                  })
+                  .join('\n')}
+              </InputFieldComponent>`;
+    }
+
+    case 'select': {
+      const { options } = field as HTMLSelectField;
+      const entries = Array.from(Object.entries(options));
+      return `<InputFieldComponent ${fieldAttrs.join('\n')} >
+                   <${inputHTML.open} component="select" ${inputAttrs.join(
+        '\n',
+      )}>
+                     ${entries
+                       .map(
+                         ([value, label]) =>
+                           `<option value="${value}">${label}</option>`,
+                       )
+                       .join('\n')}
+                   </${inputHTML.close}>
+                 </InputFieldComponent>`;
+    }
+    case 'radio': {
+      const { options, field_id } = field as HTMLRadioField;
+      const entries = Array.from(Object.entries(options));
+      return `<InputFieldComponent ${fieldAttrs.join('\n')} >
+                ${entries
+                  .map(
+                    ([value, label]) =>
+                      `<label>
+                          <SingleInputHTML component="input"
+                                           value="${value}"
+                                           name="${field_id}"
+                                           type="${type}"
+                          / >
+                          <span>${label}</span>
+                       </label>`,
+                  )
+                  .join('\n')}
+              </InputFieldComponent>`;
+    }
     default:
       throw new Error(`Never: ${type} is not valid field.type.`);
   }
 }
 
+function getImportDeclaration(locals: string[], moduleName: string) {
+  return {
+    type: 'ImportDeclaration',
+    importKind: 'value',
+    specifiers: locals.map((local) => ({
+      type: 'ImportSpecifier',
+      imported: {
+        type: 'Identifier',
+        name: local,
+      },
+      local: {
+        type: 'Identifier',
+        name: local,
+      },
+    })),
+    source: {
+      type: 'StringLiteral',
+      value: moduleName,
+    },
+  };
+}
+
 export function genForm(schema: Application) {
   const { fields } = schema;
   const p = program([
-    // Import declarations
-    {
-      type: 'ImportDeclaration',
-      importKind: 'value',
-      specifiers: [
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'InputFieldProps',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'InputFieldProps',
-          },
-        },
-      ],
-      source: {
-        type: 'StringLiteral',
-        value: '@omega/runtime',
-      },
-    },
+    // Import and export declarations
     {
       type: 'ImportDeclaration',
       importKind: 'value',
@@ -98,6 +253,17 @@ export function genForm(schema: Application) {
           local: {
             type: 'Identifier',
             name: 'React',
+          },
+        },
+        {
+          type: 'ImportSpecifier',
+          imported: {
+            type: 'Identifier',
+            name: 'useMemo',
+          },
+          local: {
+            type: 'Identifier',
+            name: 'useMemo',
           },
         },
         {
@@ -128,137 +294,25 @@ export function genForm(schema: Application) {
         value: 'react',
       },
     },
-    {
-      type: 'ImportDeclaration',
-      importKind: 'value',
-      specifiers: [
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'Formik',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'Formik',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'Form',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'Form',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'useFormikContext',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'useFormikContext',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'FormikConfig',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'FormikConfig',
-          },
-        },
+    getImportDeclaration(
+      ['Formik', 'Form', 'useFormikContext', 'FormikConfig'],
+      'formik',
+    ),
+    getImportDeclaration(
+      ['FieldMap', 'Field', 'FieldAppendable'],
+      '@omega/core',
+    ),
+    getImportDeclaration(
+      [
+        'InputFieldProps',
+        'createValidator',
+        'testCondRoot',
+        'SingleInputHTML',
+        'MultiInputHTML',
+        'InputFieldComponent',
       ],
-      source: {
-        type: 'StringLiteral',
-        value: 'formik',
-      },
-    },
-    {
-      type: 'ImportDeclaration',
-      importKind: 'value',
-      specifiers: [
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'FieldMap',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'FieldMap',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'Field',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'Field',
-          },
-        },
-      ],
-      source: {
-        type: 'StringLiteral',
-        value: '@omega/core',
-      },
-    },
-    {
-      type: 'ImportDeclaration',
-      importKind: 'value',
-      specifiers: [
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'createValidator',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'createValidator',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'testCondRoot',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'testCondRoot',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'InputFieldComponent',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'InputFieldComponent',
-          },
-        },
-      ],
-      source: {
-        type: 'StringLiteral',
-        value: '@omega/runtime',
-      },
-    },
-
-    // export type FieldValueTypes = {...}
+      '@omega/runtime',
+    ),
     {
       type: 'ExportNamedDeclaration',
       exportKind: 'type',
@@ -276,13 +330,13 @@ export function genForm(schema: Application) {
           members: fields.map(({ field_id, type }) => ({
             type: 'TSPropertySignature',
             key: {
-              type: 'Identifier',
-              name: field_id,
+              type: 'StringLiteral',
+              value: field_id,
             },
             computed: false,
             typeAnnotation: {
               type: 'TSTypeAnnotation',
-              typeAnnotation: getFieldType(type),
+              typeAnnotation: getFieldValueType(type),
             },
           })),
         },
@@ -442,7 +496,7 @@ export function genForm(schema: Application) {
   `
       : ''
   }
-  
+
   ${
     disabled_if
       ? `
@@ -464,8 +518,8 @@ export function genForm(schema: Application) {
   }
 
   ${shown_if ? `if (!shown) return <></>;` : ''}
-  
-  return ${genInnerComponent(field)};
+
+  return ${genInputHTMLComponent(field)};
 }
 
 `),
@@ -576,43 +630,41 @@ export function genForm(schema: Application) {
                 },
               },
             },
+            // TODO: Use field-level validation, it seems faster
             init: expr(`
-({children, ...props}) => (
-    <Formik
-        validate={createValidator(fieldMap)}
-        initialValues={${JSON.stringify(
-          fields.reduce(
-            (acc, { field_id, initial_value }) => ({
-              ...acc,
-              [field_id]: initial_value || '',
-            }),
-            {} as any,
-          ),
-          undefined,
-          2,
-        )} as any}
-        { ...props }
-    >
-      <Form className="omega-form">
-        <div className="omega-form__fields">
-          {children}
-          ${fields
-            .map((field) => {
-              const { field_id, type, label } = field;
-              return `<${getComponentName(field_id)}
-                      name="${field_id}"
-                      type="${type}"
-                      label="${label}"
-              />`;
-            })
-            .join('')}
-        </div>
-        <div className="omega-form__buttons">
-          <button className="omega-form__button omega-form__button--primary" type="submit">Submit</button>
-        </div>
-      </Form>
-    </Formik>
-)
+({children, ...props}) => {
+    const validator = useMemo(() => createValidator(fieldMap), []); 
+    return (
+      <Formik
+          validate={validator}
+          initialValues={${JSON.stringify(
+            getInitialValues(fields),
+            undefined,
+            2,
+          )} as any}
+          { ...props }
+      >
+        <Form className="omega-form">
+          <div className="omega-form__fields">
+            {children}
+            ${fields
+              .map((field) => {
+                const { field_id, type, label } = field;
+                return `<${getComponentName(field_id)}
+                        name="${field_id}"
+                        type="${type}"
+                        label="${label}"
+                />`;
+              })
+              .join('')}
+          </div>
+          <div className="omega-form__buttons">
+            <button className="omega-form__button omega-form__button--primary" type="submit">Submit</button>
+          </div>
+        </Form>
+      </Formik>
+    )
+}
             `),
           },
         ],
@@ -625,5 +677,6 @@ export function genForm(schema: Application) {
 
   // return code;
 
+  // TODO: Remove unused imports, TS errors in generated sources otherwise
   return format(code, { parser: 'typescript' });
 }

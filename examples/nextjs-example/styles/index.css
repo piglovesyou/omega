@@ -11,38 +11,58 @@ a[href]:hover { @apply text-blue-700 underline }
 .my-form { @apply my-16 mx-16 max-w-lg }
 @screen sm { .my-form { @apply mx-auto } }
 .my-trailing-text { @apply text-gray-600; }
-.omega-form { @apply mb-40; }
+.omega-form-tab { @apply mt-8 mb-40 border-t border-gray-500}
+.omega-form-tab-item {
+    @apply px-3 leading-7 rounded rounded-t-none text-blue-600 border border-t-0 border-transparent;
+    margin-top: -1px;
+    outline: none !important;
+}
+.omega-form-tab-item--selected {@apply border-gray-500 bg-white }
+.omega-form-tab-item:hover { @apply text-blue-700 bg-gray-200  }
 
 /* Library side style */
 .omega-form__fields { @apply grid grid-cols-1 }
 .omega-field { @apply mb-5 }
-.omega-field--required label span::after { content: '＊'; @apply text-red-600 text-xs align-top;}
-.omega-field input,
-.omega-field select { @apply px-1 border-gray-900 border border-solid rounded-sm; }
-.omega-field input::placeholder { @apply text-gray-600; }
-.omega-field__input input,
-.omega-field__input select { @apply  mr-1 align-middle; }
-.omega-field__input input { @apply leading-7 }
-.omega-field__input select { min-height: 1.75em; }
+.omega-field > label { @apply leading-7 }
+.omega-field--required > label span::after { content: '＊'; @apply text-red-600 text-xs align-top;}
 
-.omega-field__input input:not([type="checkbox"]),
-.omega-field__input select { @apply w-full  }
+/* Shared styles for input widgets */
+.omega-field input,
+.omega-field select,
+.omega-field textarea { @apply px-1 border-gray-900 border border-solid rounded-sm mr-1 align-middle; }
+.omega-field input::placeholder,
+.omega-field textarea::placeholder { @apply text-gray-600; }
+/* Styles for each input widgets */
+.omega-field input { @apply leading-7 }
+.omega-field select { min-height: 1.75em; }
+.omega-field input:not([type="checkbox"]):not([type="radio"]),
+.omega-field select,
+.omega-field textarea { @apply w-full  }
+.omega-field--checkbox .omega-field__input label,
+.omega-field--radio .omega-field__input label { @apply mr-4 }
+.omega-input-arrayitem { @apply flex items-center mb-2 }
+.omega-input-arrayitem:last-of-type { @apply mb-0 }
+.omega-field input[type="color"] { min-width: 2em }
+
 .omega-field__supplemental-text { @apply inline-block text-xs text-gray-600; }
 .omega-field__message { @apply text-red-600 ; }
 @screen sm {
     .omega-field { @apply flex }
-    .omega-field label { @apply w-24 items-center; }
+    .omega-field > label { @apply w-32 items-center; }
     .omega-field__input { @apply flex-1; }
-    .omega-field__input input:not([type="checkbox"]),
+    .omega-field__input input:not([type="checkbox"]):not([type="radio"]),
     .omega-field__input select { @apply w-auto  }
 }
 
 .omega-form__buttons { @apply flex justify-end }
 .omega-form__buttons > * { @apply ml-2 }
-.omega-form__button { @apply bg-gray-600 text-white px-2 rounded border-gray-600 border border-solid; }
+
+.omega-form__button { @apply px-3 leading-7 rounded }
 .omega-form__button:hover { @apply bg-gray-700 border-gray-700; }
-.omega-form__button--primary { @apply bg-blue-600 border-blue-600; }
+.omega-form__button--primary { @apply text-white bg-blue-600 border-blue-600; }
 .omega-form__button--primary:hover { @apply bg-blue-700 border-blue-700; }
+.omega-form__button--link { @apply text-blue-600 }
+.omega-form__button--link:hover { @apply text-blue-700 bg-gray-200 }
 /* Stop purging. */
 
 /* Write you own custom component styles here */

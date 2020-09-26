@@ -1,7 +1,35 @@
 import Head from 'next/head';
-import { FormComponent } from '../__generated__/user-account/form';
+import { FC, useCallback, useState } from 'react';
+import { FormComponent as AllFieldTypesComponent } from '../__generated__/all-field-types/form';
+import { FormComponent as ExampleFormComponent } from '../__generated__/example-app/form';
+
+const Tab: FC<{
+  setSelectedIndex: any;
+  selectedIndex: number;
+  items: string[];
+}> = ({ selectedIndex, setSelectedIndex, items }) => (
+  <div className="omega-form-tab">
+    {items.map((item, i) => (
+      <button
+        key={i}
+        className={`omega-form-tab-item ${
+          selectedIndex === i ? 'omega-form-tab-item--selected' : ''
+        }`}
+        onClick={() => setSelectedIndex(i)}
+      >
+        {item}
+      </button>
+    ))}
+  </div>
+);
 
 export default function Application() {
+  const [selectedIndex, setSelectedIndex] = useState(1);
+  const onSubmit = useCallback(
+    (values) =>
+      alert(`👍\n\nYou posted:\n${JSON.stringify(values, undefined, 2)}`),
+    [],
+  );
   return (
     <div className="my-form">
       <Head>
@@ -12,11 +40,16 @@ export default function Application() {
         />
       </Head>
       <h1>My form</h1>
-      <FormComponent
-        onSubmit={(values) =>
-          alert(`👍\n\nYou posted:\n${JSON.stringify(values, undefined, 2)}`)
-        }
+
+      {selectedIndex === 0 && <ExampleFormComponent onSubmit={onSubmit} />}
+      {selectedIndex === 1 && <AllFieldTypesComponent onSubmit={onSubmit} />}
+
+      <Tab
+        setSelectedIndex={setSelectedIndex}
+        selectedIndex={selectedIndex}
+        items={['Simple example', 'All field types']}
       />
+
       <hr />
       <p className="my-trailing-text">
         This is a demonstration of{' '}
