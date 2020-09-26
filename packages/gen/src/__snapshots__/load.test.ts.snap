@@ -3,7 +3,7 @@
 exports[`load.ts cannot load error schema 1`] = `
 "app_error.yml has the above error(s).
 
-- is not any of <#/definitions/InputField>,<#/definitions/SelectField>"
+- is not any of [subschema 0],<#/definitions/HTMLRadioField>,[subschema 2],[subschema 3]"
 `;
 
 exports[`load.ts loads "app_complex.yml" 1`] = `

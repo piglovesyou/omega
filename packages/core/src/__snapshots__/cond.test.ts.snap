@@ -745,237 +745,317 @@ exports[`testCond "email", "", { '$required': true } 1`] = `"false, this is a re
 
 exports[`testCond "email", "", {} 1`] = `"true, "`;
 
-exports[`testCond "email", "-8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "email", "-8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "-8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "-8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "-8", { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "-8", { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "-8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "-8", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "-8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "-8", { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "-8", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "-8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "-8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "-8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "-8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "-8", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "-8", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "-8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "-8", {} 1`] = `"true, "`;
+exports[`testCond "email", "-8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "email", "-8", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "-8", { '$required': true } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "-8", {} 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "8", { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "8", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "8", { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "8", {} 1`] = `"true, "`;
+exports[`testCond "email", "8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "8", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "email", "8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "email", "8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "8", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "8", { '$required': true } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "8", {} 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", {} 1`] = `"true, "`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "2020-10-10T10:10:00.000Z", {} 1`] = `"true, "`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", { '$required': true } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "123e4567-e89b-12d3-a456-426614174000", {} 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "9999-99-99T10:10:00.000Z", {} 1`] = `"true, "`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "Carrie Mathison", { '$eq': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "Carrie Mathison", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "Carrie Mathison", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "Carrie Mathison", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", { '$required': true } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "Carrie Mathison", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must not be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "2020-10-10T10:10:00.000Z", {} 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "Carrie Mathison", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must not be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "Carrie Mathison", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "Carrie Mathison", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "Carrie Mathison", {} 1`] = `"true, "`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", { '$required': true } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "9999-99-99T10:10:00.000Z", {} 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "false", {} 1`] = `"true, "`;
+exports[`testCond "email", "Carrie Mathison", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "email", "Carrie Mathison", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "Carrie Mathison", { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "email", "Carrie Mathison", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "email", "Carrie Mathison", { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "Carrie Mathison", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "Carrie Mathison", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "Carrie Mathison", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "Carrie Mathison", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "Carrie Mathison", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", "true", {} 1`] = `"true, "`;
+exports[`testCond "email", "Carrie Mathison", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "email", "Carrie Mathison", { '$required': true } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "Carrie Mathison", {} 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "false", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "false", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "false", { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "false", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "false", { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "false", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "false", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", -8, {} 1`] = `"true, "`;
+exports[`testCond "email", "false", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "email", "false", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "false", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "false", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "false", { '$required': true } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "false", {} 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "true", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "true", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "true", { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", "true", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 0, {} 1`] = `"true, "`;
+exports[`testCond "email", "true", { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "email", "true", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", "true", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "true", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "email", "true", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", "true", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", "true", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must not be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", "true", { '$required': true } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", "true", {} 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", -8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", 8, {} 1`] = `"true, "`;
+exports[`testCond "email", -8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "email", -8, { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", -8, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "email", -8, { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "email", -8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", -8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", -8, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must not be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", -8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", -8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", -8, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", false, {} 1`] = `"true, "`;
+exports[`testCond "email", -8, { '$required': true } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", -8, {} 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, { '$required': true } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 0, {} 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, { '$required': true } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", 8, {} 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, { '$required': true } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", false, {} 1`] = `"false, this must be a valid email"`;
 
 exports[`testCond "email", null, { '$and': { '$gte': 8, '$integer': true } } 1`] = `
 "false, this must be a \`string\` type, but the final value was: \`null\`.
@@ -1042,25 +1122,31 @@ exports[`testCond "email", null, {} 1`] = `
  If \\"null\\" is intended as an empty value be sure to mark the schema as \`.nullable()\`"
 `;
 
-exports[`testCond "email", true, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "email", true, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", true, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "email", true, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", true, { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "email", true, { '$gt': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", true, { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "email", true, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", true, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "email", true, { '$gte': 4 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", true, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "email", true, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", true, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "email", true, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", true, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "email", true, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", true, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "email", true, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid email"`;
 
-exports[`testCond "email", true, {} 1`] = `"true, "`;
+exports[`testCond "email", true, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", true, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", true, { '$required': true } 1`] = `"false, this must be a valid email"`;
+
+exports[`testCond "email", true, {} 1`] = `"false, this must be a valid email"`;
 
 exports[`testCond "email", undefined, { '$eq': 'Carrie Mathison' } 1`] = `"true, "`;
 
@@ -1871,237 +1957,317 @@ exports[`testCond "url", "", { '$required': true } 1`] = `"false, this is a requ
 
 exports[`testCond "url", "", {} 1`] = `"true, "`;
 
-exports[`testCond "url", "-8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "url", "-8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "-8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "-8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "-8", { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "-8", { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "-8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "-8", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "-8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "-8", { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "-8", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "-8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "-8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "-8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "-8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "-8", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "-8", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "-8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "-8", {} 1`] = `"true, "`;
+exports[`testCond "url", "-8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "url", "-8", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "-8", { '$required': true } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "-8", {} 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "8", { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "8", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "8", { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "8", {} 1`] = `"true, "`;
+exports[`testCond "url", "8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "8", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "url", "8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "url", "8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "8", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "8", { '$required': true } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "8", {} 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", {} 1`] = `"true, "`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "2020-10-10T10:10:00.000Z", {} 1`] = `"true, "`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", { '$required': true } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "123e4567-e89b-12d3-a456-426614174000", {} 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "9999-99-99T10:10:00.000Z", {} 1`] = `"true, "`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "Carrie Mathison", { '$eq': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "Carrie Mathison", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "Carrie Mathison", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "Carrie Mathison", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", { '$required': true } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "Carrie Mathison", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must not be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "2020-10-10T10:10:00.000Z", {} 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "Carrie Mathison", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must not be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "Carrie Mathison", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "Carrie Mathison", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "Carrie Mathison", {} 1`] = `"true, "`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", { '$required': true } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "9999-99-99T10:10:00.000Z", {} 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "false", {} 1`] = `"true, "`;
+exports[`testCond "url", "Carrie Mathison", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "url", "Carrie Mathison", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "Carrie Mathison", { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "url", "Carrie Mathison", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "url", "Carrie Mathison", { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "Carrie Mathison", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "Carrie Mathison", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "Carrie Mathison", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "Carrie Mathison", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "Carrie Mathison", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", "true", {} 1`] = `"true, "`;
+exports[`testCond "url", "Carrie Mathison", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "url", "Carrie Mathison", { '$required': true } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "Carrie Mathison", {} 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "false", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "false", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "false", { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "false", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "false", { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "false", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "false", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", -8, {} 1`] = `"true, "`;
+exports[`testCond "url", "false", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "url", "false", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "false", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "false", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "false", { '$required': true } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "false", {} 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "true", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "true", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "true", { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", "true", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 0, {} 1`] = `"true, "`;
+exports[`testCond "url", "true", { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "url", "true", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", "true", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "true", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "url", "true", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", "true", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", "true", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must not be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", "true", { '$required': true } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", "true", {} 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", -8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", 8, {} 1`] = `"true, "`;
+exports[`testCond "url", -8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "url", -8, { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", -8, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "url", -8, { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "url", -8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", -8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", -8, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must not be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", -8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", -8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", -8, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", false, {} 1`] = `"true, "`;
+exports[`testCond "url", -8, { '$required': true } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", -8, {} 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, { '$required': true } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 0, {} 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, { '$required': true } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", 8, {} 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, { '$required': true } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", false, {} 1`] = `"false, this must be a valid URL"`;
 
 exports[`testCond "url", null, { '$and': { '$gte': 8, '$integer': true } } 1`] = `
 "false, this must be a \`string\` type, but the final value was: \`null\`.
@@ -2168,25 +2334,31 @@ exports[`testCond "url", null, {} 1`] = `
  If \\"null\\" is intended as an empty value be sure to mark the schema as \`.nullable()\`"
 `;
 
-exports[`testCond "url", true, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "url", true, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", true, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "url", true, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", true, { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "url", true, { '$gt': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", true, { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "url", true, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", true, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "url", true, { '$gte': 4 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", true, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "url", true, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", true, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "url", true, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", true, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "url", true, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", true, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "url", true, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid URL"`;
 
-exports[`testCond "url", true, {} 1`] = `"true, "`;
+exports[`testCond "url", true, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", true, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", true, { '$required': true } 1`] = `"false, this must be a valid URL"`;
+
+exports[`testCond "url", true, {} 1`] = `"false, this must be a valid URL"`;
 
 exports[`testCond "url", undefined, { '$eq': 'Carrie Mathison' } 1`] = `"true, "`;
 
@@ -2206,65 +2378,83 @@ exports[`testCond "url", undefined, { '$required': true } 1`] = `"false, this is
 
 exports[`testCond "url", undefined, {} 1`] = `"true, "`;
 
-exports[`testCond "uuid", "", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", "", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "", { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "", { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "", { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "", { '$required': true } 1`] = `"false, this is a required field"`;
+exports[`testCond "uuid", "", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "", {} 1`] = `"true, "`;
+exports[`testCond "uuid", "", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", "", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "", { '$required': true } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "", {} 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "-8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "-8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "-8", { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "-8", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "-8", { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", "-8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "-8", {} 1`] = `"true, "`;
+exports[`testCond "uuid", "-8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", "-8", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "-8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "-8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "-8", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "-8", { '$required': true } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "-8", {} 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "8", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "8", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", "8", { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "8", {} 1`] = `"true, "`;
+exports[`testCond "uuid", "8", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", "8", { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", "8", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", "8", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", "8", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", "8", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", "8", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", "8", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", "8", { '$required': true } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", "8", {} 1`] = `"false, this must be a valid UUID"`;
 
 exports[`testCond "uuid", "123e4567-e89b-12d3-a456-426614174000", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
 
@@ -2284,179 +2474,239 @@ exports[`testCond "uuid", "123e4567-e89b-12d3-a456-426614174000", { '$required':
 
 exports[`testCond "uuid", "123e4567-e89b-12d3-a456-426614174000", {} 1`] = `"true, "`;
 
-exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", {} 1`] = `"true, "`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", { '$required': true } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "2020-10-10T10:10:00.000Z", {} 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", {} 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "Carrie Mathison", { '$eq': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "Carrie Mathison", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "Carrie Mathison", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at most 8 characters"`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "Carrie Mathison", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "Carrie Mathison", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must not be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "Carrie Mathison", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must not be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "Carrie Mathison", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", { '$required': true } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "Carrie Mathison", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", "9999-99-99T10:10:00.000Z", {} 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "Carrie Mathison", {} 1`] = `"true, "`;
+exports[`testCond "uuid", "Carrie Mathison", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", "Carrie Mathison", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "Carrie Mathison", { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "uuid", "Carrie Mathison", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "uuid", "Carrie Mathison", { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "Carrie Mathison", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "Carrie Mathison", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "Carrie Mathison", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "Carrie Mathison", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", "Carrie Mathison", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "false", {} 1`] = `"true, "`;
+exports[`testCond "uuid", "Carrie Mathison", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", "Carrie Mathison", { '$required': true } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "Carrie Mathison", {} 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "uuid", "false", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "uuid", "false", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "false", { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "false", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "false", { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "false", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", "false", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", "true", {} 1`] = `"true, "`;
+exports[`testCond "uuid", "false", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", "false", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "false", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "false", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "false", { '$required': true } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "false", {} 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "true", { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "true", { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "true", { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", "true", { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", -8, {} 1`] = `"true, "`;
+exports[`testCond "uuid", "true", { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", "true", { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", "true", { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "true", { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", "true", { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", "true", { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", "true", { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", "true", { '$required': true } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", "true", {} 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", -8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 0, {} 1`] = `"true, "`;
+exports[`testCond "uuid", -8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", -8, { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", -8, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, { '$gte': 4 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", -8, { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be at least 4 characters"`;
+exports[`testCond "uuid", -8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", -8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", -8, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must not be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", -8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", -8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", -8, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", 8, {} 1`] = `"true, "`;
+exports[`testCond "uuid", -8, { '$required': true } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", -8, {} 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", 0, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "uuid", 0, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "uuid", 0, { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", 0, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", 0, { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must not be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", 0, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", 0, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", 0, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", false, {} 1`] = `"true, "`;
+exports[`testCond "uuid", 0, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 0, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 0, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 0, { '$required': true } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 0, {} 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, { '$required': true } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", 8, {} 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, { '$required': true } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", false, {} 1`] = `"false, this must be a valid UUID"`;
 
 exports[`testCond "uuid", null, { '$and': { '$gte': 8, '$integer': true } } 1`] = `
 "false, this must be a \`string\` type, but the final value was: \`null\`.
@@ -2523,25 +2773,31 @@ exports[`testCond "uuid", null, {} 1`] = `
  If \\"null\\" is intended as an empty value be sure to mark the schema as \`.nullable()\`"
 `;
 
-exports[`testCond "uuid", true, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be at least 8 characters"`;
+exports[`testCond "uuid", true, { '$and': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", true, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be one of the following values: Carrie Mathison"`;
+exports[`testCond "uuid", true, { '$eq': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", true, { '$gte': 4 } 1`] = `"true, "`;
+exports[`testCond "uuid", true, { '$gt': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", true, { '$gte': 4, '$lte': 8 } 1`] = `"true, "`;
+exports[`testCond "uuid", true, { '$gt': 4, '$lt': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", true, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be one of the following values: Carrie Mathison, false, 8"`;
+exports[`testCond "uuid", true, { '$gte': 4 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", true, { '$ne': 'Carrie Mathison' } 1`] = `"true, "`;
+exports[`testCond "uuid", true, { '$gte': 4, '$lte': 8 } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", true, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"true, "`;
+exports[`testCond "uuid", true, { '$in': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", true, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"true, "`;
+exports[`testCond "uuid", true, { '$ne': 'Carrie Mathison' } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", true, { '$required': true } 1`] = `"true, "`;
+exports[`testCond "uuid", true, { '$nin': [ 'Carrie Mathison', false, 8, [length]: 3 ] } 1`] = `"false, this must be a valid UUID"`;
 
-exports[`testCond "uuid", true, {} 1`] = `"true, "`;
+exports[`testCond "uuid", true, { '$not': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", true, { '$or': { '$gte': 8, '$integer': true } } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", true, { '$required': true } 1`] = `"false, this must be a valid UUID"`;
+
+exports[`testCond "uuid", true, {} 1`] = `"false, this must be a valid UUID"`;
 
 exports[`testCond "uuid", undefined, { '$eq': 'Carrie Mathison' } 1`] = `"true, "`;
 
