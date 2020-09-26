@@ -4,9 +4,19 @@ import { useField } from 'formik';
 export type InputHTMLAttributesStrict = InputHTMLAttributes<
   HTMLInputElement
 > & { name: string };
-export type InputHTMLAttributesStrictWithName = {
+
+export type InputHTMLAttributesStrictWithName = InputHTMLAttributesStrict & {
   component: string;
-} & InputHTMLAttributesStrict;
+};
+
+export type InputFieldProps = Pick<
+  InputHTMLAttributesStrict,
+  'name' | 'type'
+> & {
+  label: string;
+  required?: boolean;
+  supplementalText?: string;
+};
 
 export const SingleInputHTML: FC<InputHTMLAttributesStrictWithName> = ({
   component,
@@ -24,14 +34,6 @@ export const SingleInputHTML: FC<InputHTMLAttributesStrictWithName> = ({
     },
     children,
   );
-};
-
-export type InputFieldProps = {
-  name: string;
-  type: string;
-  label: string;
-  required?: boolean;
-  supplementalText?: string;
 };
 
 export const InputFieldComponent: FC<InputFieldProps> = ({
