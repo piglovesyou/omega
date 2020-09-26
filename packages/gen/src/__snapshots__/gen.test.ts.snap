@@ -1,14 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 1`] = `
-"import { InputFieldProps } from \\"@omega/runtime\\";
-import React, { useState, useEffect } from \\"react\\";
+"import React, { useState, useEffect } from \\"react\\";
 import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
 import { FieldMap, Field } from \\"@omega/core\\";
 import {
+  InputFieldProps,
   createValidator,
   testCondRoot,
   InputFieldComponent,
+  SingleInputHTML,
 } from \\"@omega/runtime\\";
 
 /* Form value type */
@@ -39,12 +40,20 @@ export const fieldMap: FieldMap = new Map<string, Field>([
 
 /* Component function for \\"name\\" */
 export const NameFieldComponent: React.FC<InputFieldProps> = (props) => {
-  return <InputFieldComponent component=\\"input\\" {...props} />;
+  return (
+    <InputFieldComponent {...props}>
+      <SingleInputHTML component=\\"input\\" {...props} />
+    </InputFieldComponent>
+  );
 };
 
 /* Component function for \\"age\\" */
 export const AgeFieldComponent: React.FC<InputFieldProps> = (props) => {
-  return <InputFieldComponent component=\\"input\\" {...props} />;
+  return (
+    <InputFieldComponent {...props}>
+      <SingleInputHTML component=\\"input\\" {...props} />
+    </InputFieldComponent>
+  );
 };
 
 /* Form component */
@@ -87,14 +96,15 @@ export const FormComponent: React.FC<FormComponentProps> = ({
 `;
 
 exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 2`] = `
-"import { InputFieldProps } from \\"@omega/runtime\\";
-import React, { useState, useEffect } from \\"react\\";
+"import React, { useState, useEffect } from \\"react\\";
 import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
 import { FieldMap, Field } from \\"@omega/core\\";
 import {
+  InputFieldProps,
   createValidator,
   testCondRoot,
   InputFieldComponent,
+  SingleInputHTML,
 } from \\"@omega/runtime\\";
 
 /* Form value type */
@@ -141,7 +151,11 @@ export const fieldMap: FieldMap = new Map<string, Field>([
 
 /* Component function for \\"name\\" */
 export const NameFieldComponent: React.FC<InputFieldProps> = (props) => {
-  return <InputFieldComponent component=\\"input\\" required {...props} />;
+  return (
+    <InputFieldComponent required {...props}>
+      <SingleInputHTML component=\\"input\\" {...props} />
+    </InputFieldComponent>
+  );
 };
 
 /* Component function for \\"age\\" */
@@ -171,12 +185,9 @@ export const AgeFieldComponent: React.FC<InputFieldProps> = (props) => {
   );
   if (!shown) return <></>;
   return (
-    <InputFieldComponent
-      component=\\"input\\"
-      disabled={disabled}
-      required
-      {...props}
-    />
+    <InputFieldComponent required {...props}>
+      <SingleInputHTML component=\\"input\\" disabled={disabled} {...props} />
+    </InputFieldComponent>
   );
 };
 
