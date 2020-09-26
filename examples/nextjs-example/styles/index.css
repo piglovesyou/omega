@@ -26,6 +26,8 @@ a[href]:hover { @apply text-blue-700 underline }
 .omega-field__input input { @apply leading-7 }
 .omega-field__input select { min-height: 1.75em; }
 
+.omega-input-arrayitem { @apply flex pb-2 }
+
 .omega-field__input input:not([type="checkbox"]),
 .omega-field__input select { @apply w-full  }
 .omega-field__supplemental-text { @apply inline-block text-xs text-gray-600; }
@@ -40,10 +42,13 @@ a[href]:hover { @apply text-blue-700 underline }
 
 .omega-form__buttons { @apply flex justify-end }
 .omega-form__buttons > * { @apply ml-2 }
-.omega-form__button { @apply bg-gray-600 text-white px-3 leading-7 box-border rounded border-gray-600 border border-solid; }
+
+.omega-form__button { @apply px-3 leading-7 rounded }
 .omega-form__button:hover { @apply bg-gray-700 border-gray-700; }
-.omega-form__button--primary { @apply bg-blue-600 border-blue-600; }
+.omega-form__button--primary { @apply text-white bg-blue-600 border-blue-600; }
 .omega-form__button--primary:hover { @apply bg-blue-700 border-blue-700; }
+.omega-form__button--link { @apply text-blue-600 }
+.omega-form__button--link:hover { @apply text-blue-700 bg-gray-200 }
 /* Stop purging. */
 
 /* Write you own custom component styles here */

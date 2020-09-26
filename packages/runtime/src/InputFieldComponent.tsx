@@ -1,5 +1,5 @@
-import React, { InputHTMLAttributes, FC } from 'react';
-import { useField } from 'formik';
+import React, { InputHTMLAttributes, FC, useState } from 'react';
+import { FieldArray, useField, useFormikContext } from 'formik';
 
 export type InputHTMLAttributesStrict = InputHTMLAttributes<
   HTMLInputElement
@@ -33,6 +33,64 @@ export const SingleInputHTML: FC<InputHTMLAttributesStrictWithName> = ({
       id: name,
     },
     children,
+  );
+};
+
+export const MultiInputHTML: FC<InputHTMLAttributesStrictWithName> = ({
+  component,
+  ...attributes
+}) => {
+  const { name } = attributes;
+  const [{ value }] = useField(name);
+  return (
+    <>
+      <FieldArray
+        name={name}
+        render={(arrayHelpers) =>
+          value && value.length > 0 ? (
+            (value as any[]).map((v, index) => {
+              const itemName = `${name}.${index}`;
+              return (
+                <div key={itemName} className="omega-input-arrayitem">
+                  <SingleInputHTML
+                    component={component}
+                    {...attributes}
+                    value={v}
+                    name={itemName}
+                  />
+                  <button
+                    type="button"
+                    className="omega-form__button omega-form__button--link"
+                    onClick={() => arrayHelpers.remove(index)}
+                  >
+                    Remove
+                  </button>
+                  <button
+                    type="button"
+                    className="omega-form__button omega-form__button--link"
+                    onClick={() => {
+                      arrayHelpers.insert(index + 1, '');
+                    }} // insert an empty string at a position
+                  >
+                    Add
+                  </button>
+                </div>
+              );
+            })
+          ) : (
+            <button
+              type="button"
+              className="omega-form__button omega-form__button--link"
+              onClick={() => {
+                arrayHelpers.push('');
+              }}
+            >
+              Add
+            </button>
+          )
+        }
+      />
+    </>
   );
 };
 

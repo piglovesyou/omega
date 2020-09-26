@@ -13,6 +13,7 @@ interface FieldBase<FieldType> {
   valid_if?: Cond;
   shown_if?: CondRoot;
   disabled_if?: CondRoot;
+  multi?: boolean;
 }
 
 /**

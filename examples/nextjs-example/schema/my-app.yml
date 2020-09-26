@@ -5,12 +5,14 @@ fields:
     - field_id: name
       type: text
       label: Name
+      multi: true
       placeholder_text: Carrie Mathison
       valid_if:
           $required: true
 
     - field_id: date
       type: date
+      multi: true
       label: Birthday
 
     - field_id: age

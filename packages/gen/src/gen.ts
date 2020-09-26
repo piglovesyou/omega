@@ -23,6 +23,7 @@ function genInputHTMLComponent(field: Field) {
     supplemental_text,
     placeholder_text,
     valid_if,
+    multi,
   } = field;
   const inputAttrs: string[] = [];
   const fieldAttrs: string[] = [];
@@ -37,6 +38,8 @@ function genInputHTMLComponent(field: Field) {
   fieldAttrs.push(`{...props}`);
   inputAttrs.push(`{...props}`);
 
+  const inputHTMLName = multi === true ? 'MultiInputHTML' : 'SingleInputHTML';
+
   switch (type) {
     case 'date':
     case 'checkbox':
@@ -46,21 +49,21 @@ function genInputHTMLComponent(field: Field) {
     case 'email':
     case 'url':
       return `<InputFieldComponent ${fieldAttrs.join('\n')}>
-                <SingleInputHTML component="input" ${inputAttrs.join('\n')} />
+                <${inputHTMLName} component="input" ${inputAttrs.join('\n')} />
               </InputFieldComponent>`;
     case 'select': {
       const { options } = field as SelectField;
       const optionEntires = Array.from(Object.entries(options));
       return `<InputFieldComponent ${fieldAttrs.join('\n')} >
-                  <SingleInputHTML component="select" ${inputAttrs.join('\n')}>
-                    ${optionEntires
-                      .map(
-                        ([value, label]) =>
-                          `<option value="${value}">${label}</option>`,
-                      )
-                      .join('\n')}
-                  </SingleInputHTML>
-                </InputFieldComponent>`;
+                <${inputHTMLName} component="select" ${inputAttrs.join('\n')}>
+                  ${optionEntires
+                    .map(
+                      ([value, label]) =>
+                        `<option value="${value}">${label}</option>`,
+                    )
+                    .join('\n')}
+                </${inputHTMLName}>
+              </InputFieldComponent>`;
     }
     default:
       throw new Error(`Never: ${type} is not valid field.type.`);
@@ -144,6 +147,7 @@ export function genForm(schema: Application) {
         'testCondRoot',
         'InputFieldComponent',
         'SingleInputHTML',
+        'MultiInputHTML',
       ],
       '@omega/runtime',
     ),
@@ -470,9 +474,9 @@ export function genForm(schema: Application) {
         validate={createValidator(fieldMap)}
         initialValues={${JSON.stringify(
           fields.reduce(
-            (acc, { field_id, initial_value }) => ({
+            (acc, { field_id, initial_value, multi }) => ({
               ...acc,
-              [field_id]: initial_value || '',
+              [field_id]: initial_value || multi ? [''] : '',
             }),
             {} as any,
           ),
