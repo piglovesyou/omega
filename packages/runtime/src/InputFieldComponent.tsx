@@ -1,25 +1,48 @@
-import React, { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes, FC } from 'react';
 import { useField } from 'formik';
 
+export type InputHTMLAttributesStrict = InputHTMLAttributes<
+  HTMLInputElement
+> & { name: string };
+export type InputHTMLAttributesStrictWithName = {
+  component: string;
+} & InputHTMLAttributesStrict;
+
+export const SingleInputHTML: FC<InputHTMLAttributesStrictWithName> = ({
+  component,
+  children,
+  ...attributes
+}) => {
+  const [field] = useField(attributes);
+  const { name } = attributes;
+  return React.createElement(
+    component,
+    {
+      ...attributes,
+      ...field,
+      id: name,
+    },
+    children,
+  );
+};
+
 export type InputFieldProps = {
+  name: string;
+  type: string;
   label: string;
   required?: boolean;
   supplementalText?: string;
-} & InputHTMLAttributes<HTMLInputElement>;
-export const InputFieldComponent: React.FC<
-  {
-    component: 'input' | 'select';
-  } & InputFieldProps
-> = ({
-  component,
-  children,
+};
+
+export const InputFieldComponent: FC<InputFieldProps> = ({
+  name,
+  type,
   label,
   required,
   supplementalText,
-  ...attributes
-}: any) => {
-  const { type, name } = attributes;
-  const [field, meta] = useField(attributes);
+  children,
+}) => {
+  const [, meta] = useField(name);
   return (
     <div
       className={`omega-field omega-field--${type} ${
@@ -30,15 +53,7 @@ export const InputFieldComponent: React.FC<
         <span>{label}</span>
       </label>
       <div className={`omega-field__input`}>
-        {React.createElement(
-          component,
-          {
-            ...attributes,
-            ...field,
-            id: name,
-          },
-          children,
-        )}
+        {children}
         {supplementalText && (
           <div className={`omega-field__supplemental-text`}>
             {supplementalText}

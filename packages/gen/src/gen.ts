@@ -16,7 +16,7 @@ function getComponentName(fieldId: string) {
   return `${pascalCase(fieldId)}FieldComponent`;
 }
 
-function genInnerComponent(field: Field) {
+function genInputHTMLComponent(field: Field) {
   const {
     type,
     disabled_if,
@@ -24,16 +24,18 @@ function genInnerComponent(field: Field) {
     placeholder_text,
     valid_if,
   } = field;
-  const attributeStrs: string[] = [];
+  const inputAttrs: string[] = [];
+  const fieldAttrs: string[] = [];
 
-  if (disabled_if) attributeStrs.push(`disabled={disabled}`);
-  if (valid_if && !validateCond(type, '', valid_if)) {
-    attributeStrs.push(`required`);
-  }
+  if (disabled_if) inputAttrs.push(`disabled={disabled}`);
+  if (placeholder_text) inputAttrs.push(`placeholder="${placeholder_text}"`);
+  if (valid_if && !validateCond(type, '', valid_if))
+    fieldAttrs.push(`required`);
   if (supplemental_text)
-    attributeStrs.push(`supplementalText="${supplemental_text}"`);
-  if (placeholder_text) attributeStrs.push(`placeholder="${placeholder_text}"`);
-  attributeStrs.push(`{...props}`);
+    fieldAttrs.push(`supplementalText="${supplemental_text}"`);
+
+  fieldAttrs.push(`{...props}`);
+  inputAttrs.push(`{...props}`);
 
   switch (type) {
     case 'date':
@@ -43,52 +45,54 @@ function genInnerComponent(field: Field) {
     case 'text':
     case 'email':
     case 'url':
-      return `<InputFieldComponent component="input" ${attributeStrs.join(
-        '\n',
-      )} />`;
-    case 'select':
-      return `<InputFieldComponent
-                    component="select"
-                    ${attributeStrs.join('\n')}
-              >
-                    ${Array.from(Object.entries((field as SelectField).options))
+      return `<InputFieldComponent ${fieldAttrs.join('\n')}>
+                <SingleInputHTML component="input" ${inputAttrs.join('\n')} />
+              </InputFieldComponent>`;
+    case 'select': {
+      const { options } = field as SelectField;
+      const optionEntires = Array.from(Object.entries(options));
+      return `<InputFieldComponent ${fieldAttrs.join('\n')} >
+                  <SingleInputHTML component="select" ${inputAttrs.join('\n')}>
+                    ${optionEntires
                       .map(
                         ([value, label]) =>
                           `<option value="${value}">${label}</option>`,
                       )
                       .join('\n')}
-                  </InputFieldComponent>
-    `;
+                  </SingleInputHTML>
+                </InputFieldComponent>`;
+    }
     default:
       throw new Error(`Never: ${type} is not valid field.type.`);
   }
 }
 
+function getImportDeclaration(locals: string[], moduleName: string) {
+  return {
+    type: 'ImportDeclaration',
+    importKind: 'value',
+    specifiers: locals.map((local) => ({
+      type: 'ImportSpecifier',
+      imported: {
+        type: 'Identifier',
+        name: local,
+      },
+      local: {
+        type: 'Identifier',
+        name: local,
+      },
+    })),
+    source: {
+      type: 'StringLiteral',
+      value: moduleName,
+    },
+  };
+}
+
 export function genForm(schema: Application) {
   const { fields } = schema;
   const p = program([
-    // Import declarations
-    {
-      type: 'ImportDeclaration',
-      importKind: 'value',
-      specifiers: [
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'InputFieldProps',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'InputFieldProps',
-          },
-        },
-      ],
-      source: {
-        type: 'StringLiteral',
-        value: '@omega/runtime',
-      },
-    },
+    // Import and export declarations
     {
       type: 'ImportDeclaration',
       importKind: 'value',
@@ -128,137 +132,21 @@ export function genForm(schema: Application) {
         value: 'react',
       },
     },
-    {
-      type: 'ImportDeclaration',
-      importKind: 'value',
-      specifiers: [
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'Formik',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'Formik',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'Form',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'Form',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'useFormikContext',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'useFormikContext',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'FormikConfig',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'FormikConfig',
-          },
-        },
+    getImportDeclaration(
+      ['Formik', 'Form', 'useFormikContext', 'FormikConfig'],
+      'formik',
+    ),
+    getImportDeclaration(['FieldMap', 'Field'], '@omega/core'),
+    getImportDeclaration(
+      [
+        'InputFieldProps',
+        'createValidator',
+        'testCondRoot',
+        'InputFieldComponent',
+        'SingleInputHTML',
       ],
-      source: {
-        type: 'StringLiteral',
-        value: 'formik',
-      },
-    },
-    {
-      type: 'ImportDeclaration',
-      importKind: 'value',
-      specifiers: [
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'FieldMap',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'FieldMap',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'Field',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'Field',
-          },
-        },
-      ],
-      source: {
-        type: 'StringLiteral',
-        value: '@omega/core',
-      },
-    },
-    {
-      type: 'ImportDeclaration',
-      importKind: 'value',
-      specifiers: [
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'createValidator',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'createValidator',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'testCondRoot',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'testCondRoot',
-          },
-        },
-        {
-          type: 'ImportSpecifier',
-          imported: {
-            type: 'Identifier',
-            name: 'InputFieldComponent',
-          },
-          local: {
-            type: 'Identifier',
-            name: 'InputFieldComponent',
-          },
-        },
-      ],
-      source: {
-        type: 'StringLiteral',
-        value: '@omega/runtime',
-      },
-    },
-
-    // export type FieldValueTypes = {...}
+      '@omega/runtime',
+    ),
     {
       type: 'ExportNamedDeclaration',
       exportKind: 'type',
@@ -465,7 +353,7 @@ export function genForm(schema: Application) {
 
   ${shown_if ? `if (!shown) return <></>;` : ''}
   
-  return ${genInnerComponent(field)};
+  return ${genInputHTMLComponent(field)};
 }
 
 `),
