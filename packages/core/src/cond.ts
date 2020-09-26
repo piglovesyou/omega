@@ -3,18 +3,31 @@ import * as yup from 'yup';
 import { Cond, CondForTypes, MixedCond, NestCond } from './types/cond';
 import { AllowedFieldTypes } from './types/field';
 
-function getValid(type: AllowedFieldTypes) {
+function getValidatorForType(type: AllowedFieldTypes) {
   switch (type) {
     case 'text':
-    case 'email':
-    case 'url':
-    case 'uuid':
+    case 'color':
+    case 'tel':
+    case 'select':
+    case 'radio':
+    case 'textarea':
       return yup.string();
+    case 'email':
+      return yup.string().email();
+    case 'uuid':
+      return yup.string().uuid();
+    case 'url':
+      return yup.string().url();
     case 'number':
+    case 'range':
       return yup.number();
     case 'checkbox':
       return yup.boolean();
+    // case 'week':
     case 'date':
+    case 'datetime-local':
+    case 'time':
+    case 'month':
       return yup.date();
     default:
       throw new Error(`${type} is not a valid field.type.`);
@@ -102,28 +115,34 @@ function validateCondRecur(
   if (!isEmpty(unknownConds))
     throw new Error(`There are unknown keys ${Object.keys(unknownConds)}`);
   let typeValid: Schema<any> | null = null;
-  if ($required) typeValid = (typeValid = getValid(type)).required();
+  if ($required) typeValid = (typeValid = getValidatorForType(type)).required();
   if ($gt)
-    typeValid = (typeValid = getValid(type) as yup.NumberSchema).moreThan($gt);
+    typeValid = (typeValid = getValidatorForType(
+      type,
+    ) as yup.NumberSchema).moreThan($gt);
   if ($gte)
-    typeValid = ((typeValid || (typeValid = getValid(type))) as
+    typeValid = ((typeValid || (typeValid = getValidatorForType(type))) as
       | yup.StringSchema
       | yup.NumberSchema
       | yup.DateSchema).min($gte);
   if ($lt)
     typeValid = ((typeValid ||
-      (typeValid = getValid(type))) as yup.NumberSchema).lessThan($lt);
+      (typeValid = getValidatorForType(type))) as yup.NumberSchema).lessThan(
+      $lt,
+    );
   if ($lte)
-    typeValid = ((typeValid || (typeValid = getValid(type))) as
+    typeValid = ((typeValid || (typeValid = getValidatorForType(type))) as
       | yup.StringSchema
       | yup.NumberSchema
       | yup.DateSchema).max($lte);
   if ($length)
     typeValid = ((typeValid ||
-      (typeValid = getValid(type))) as yup.StringSchema).length($length);
+      (typeValid = getValidatorForType(type))) as yup.StringSchema).length(
+      $length,
+    );
   if ($integer)
     typeValid = ((typeValid ||
-      (typeValid = getValid(type))) as yup.NumberSchema).integer();
+      (typeValid = getValidatorForType(type))) as yup.NumberSchema).integer();
   if (typeValid && !validate(typeValid, val, messages)) return false;
 
   return true;
@@ -135,16 +154,6 @@ export function validateCond(
   cond: Cond,
   messages: string[] = [],
 ): boolean {
-  if (!validate(getValid(type), val, messages)) return false;
+  if (!validate(getValidatorForType(type), val, messages)) return false;
   return validateCondRecur(type, val, cond, messages);
 }
-/*
-export function testCond(
-    type: FieldTypes,
-    val: any,
-    cond: Cond,
-): boolean {
-  if (!validate(getValid(type), val, [])) return false;
-  return validateCondRecur(type, val, cond, []);
-}
-*/

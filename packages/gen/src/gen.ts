@@ -1,4 +1,4 @@
-import { Application, Field, SelectField, validateCond } from '@omega/core';
+import { Application, Field, HTMLSelectField, validateCond } from '@omega/core';
 import { getFieldType } from './ast/field';
 import { program } from '@babel/types';
 import { parseExpression, ParserOptions } from '@babel/parser';
@@ -23,7 +23,6 @@ function genInputHTMLComponent(field: Field) {
     supplemental_text,
     placeholder_text,
     valid_if,
-    multi,
   } = field;
   const inputAttrs: string[] = [];
   const fieldAttrs: string[] = [];
@@ -38,7 +37,8 @@ function genInputHTMLComponent(field: Field) {
   fieldAttrs.push(`{...props}`);
   inputAttrs.push(`{...props}`);
 
-  const inputHTMLName = multi === true ? 'MultiInputHTML' : 'SingleInputHTML';
+  const inputHTMLName =
+    (field as any).multi! === true ? 'MultiInputHTML' : 'SingleInputHTML';
 
   switch (type) {
     case 'date':
@@ -52,7 +52,7 @@ function genInputHTMLComponent(field: Field) {
                 <${inputHTMLName} component="input" ${inputAttrs.join('\n')} />
               </InputFieldComponent>`;
     case 'select': {
-      const { options } = field as SelectField;
+      const { options } = field as HTMLSelectField;
       const optionEntires = Array.from(Object.entries(options));
       return `<InputFieldComponent ${fieldAttrs.join('\n')} >
                 <${inputHTMLName} component="select" ${inputAttrs.join('\n')}>
@@ -473,13 +473,13 @@ export function genForm(schema: Application) {
     <Formik
         validate={createValidator(fieldMap)}
         initialValues={${JSON.stringify(
-          fields.reduce(
-            (acc, { field_id, initial_value, multi }) => ({
+          fields.reduce((acc, field) => {
+            const { field_id, initial_value } = field;
+            return {
               ...acc,
-              [field_id]: initial_value || multi ? [''] : '',
-            }),
-            {} as any,
-          ),
+              [field_id]: initial_value || (field as any).multi ? [''] : '',
+            };
+          }, {} as any),
           undefined,
           2,
         )} as any}
