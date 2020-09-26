@@ -16,6 +16,7 @@ a[href]:hover { @apply text-blue-700 underline }
 /* Library side style */
 .omega-form__fields { @apply grid grid-cols-1 }
 .omega-field { @apply mb-5 }
+.omega-field label { @apply leading-7 }
 .omega-field--required label span::after { content: '＊'; @apply text-red-600 text-xs align-top;}
 .omega-field input,
 .omega-field select { @apply px-1 border-gray-900 border border-solid rounded-sm; }
@@ -39,7 +40,7 @@ a[href]:hover { @apply text-blue-700 underline }
 
 .omega-form__buttons { @apply flex justify-end }
 .omega-form__buttons > * { @apply ml-2 }
-.omega-form__button { @apply bg-gray-600 text-white px-2 rounded border-gray-600 border border-solid; }
+.omega-form__button { @apply bg-gray-600 text-white px-3 leading-7 box-border rounded border-gray-600 border border-solid; }
 .omega-form__button:hover { @apply bg-gray-700 border-gray-700; }
 .omega-form__button--primary { @apply bg-blue-600 border-blue-600; }
 .omega-form__button--primary:hover { @apply bg-blue-700 border-blue-700; }
