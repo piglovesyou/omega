@@ -94,7 +94,7 @@ function validateCondRecur(
     ...typeConds
   } = mixedConds as Required<MixedCond>;
   let mixedValid: MixedSchema | null = null;
-  if ($in) mixedValid = (mixedValid || (mixedValid = yup.mixed())).oneOf($in);
+  if ($in) mixedValid = (mixedValid = yup.mixed()).oneOf($in);
   if ($nin)
     mixedValid = (mixedValid || (mixedValid = yup.mixed())).notOneOf($nin);
   if ($eq) mixedValid = (mixedValid || (mixedValid = yup.mixed())).oneOf([$eq]);
@@ -114,38 +114,24 @@ function validateCondRecur(
   } = typeConds as Required<CondForTypes>;
   if (!isEmpty(unknownConds))
     throw new Error(`There are unknown keys ${Object.keys(unknownConds)}`);
-  let typeValid: Schema<any> | null = null;
-  if ($required) typeValid = (typeValid = getValidatorForType(type)).required();
-  if ($gt)
-    typeValid = (typeValid = getValidatorForType(
-      type,
-    ) as yup.NumberSchema).moreThan($gt);
-  if ($gte)
-    typeValid = ((typeValid || (typeValid = getValidatorForType(type))) as
-      | yup.StringSchema
-      | yup.NumberSchema
-      | yup.DateSchema).min($gte);
-  if ($lt)
-    typeValid = ((typeValid ||
-      (typeValid = getValidatorForType(type))) as yup.NumberSchema).lessThan(
-      $lt,
-    );
-  if ($lte)
-    typeValid = ((typeValid || (typeValid = getValidatorForType(type))) as
-      | yup.StringSchema
-      | yup.NumberSchema
-      | yup.DateSchema).max($lte);
-  if ($length)
-    typeValid = ((typeValid ||
-      (typeValid = getValidatorForType(type))) as yup.StringSchema).length(
-      $length,
-    );
-  if ($integer)
-    typeValid = ((typeValid ||
-      (typeValid = getValidatorForType(type))) as yup.NumberSchema).integer();
-  if (typeValid && !validate(typeValid, val, messages)) return false;
 
-  return true;
+  let valid = getValidatorForType(type);
+
+  if ($required) valid = valid.required();
+  if ($gt) valid = (valid as yup.NumberSchema).moreThan($gt);
+  if ($gte)
+    valid = (valid as yup.StringSchema | yup.NumberSchema | yup.DateSchema).min(
+      $gte,
+    );
+  if ($lt) valid = (valid as yup.NumberSchema).lessThan($lt);
+  if ($lte)
+    valid = (valid as yup.StringSchema | yup.NumberSchema | yup.DateSchema).max(
+      $lte,
+    );
+  if ($length) valid = (valid as yup.StringSchema).length($length);
+  if ($integer) valid = (valid as yup.NumberSchema).integer();
+
+  return validate(valid, val, messages);
 }
 
 export function validateCond(
