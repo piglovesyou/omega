@@ -1,4 +1,4 @@
-import { validateCond, CondRoot, FieldMap, FieldPluralable } from '@omega/core';
+import { validateCond, CondRoot, FieldMap, FieldAppendable } from '@omega/core';
 
 type Values = { [field_id: string]: any };
 
@@ -13,7 +13,7 @@ export function createValidator(fieldMap: FieldMap) {
       if (
         !validateCond(
           type,
-          (field as FieldPluralable).multi,
+          (field as FieldAppendable).multi,
           val,
           valid_if,
           messages,
@@ -36,7 +36,7 @@ export function testCondRoot(
     if (!type) throw new Error('never');
     const valid = validateCond(
       type,
-      (field as FieldPluralable).multi,
+      (field as FieldAppendable).multi,
       values[fieldId],
       cond,
       [],

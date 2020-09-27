@@ -1,7 +1,7 @@
 import {
   Application,
   Field,
-  FieldPluralable,
+  FieldAppendable,
   HTMLCheckboxField,
   HTMLRadioField,
   HTMLSelectField,
@@ -28,7 +28,7 @@ function getComponentName(fieldId: string) {
 function getInitialValue(field: Field) {
   const { initial_value } = field;
   if (initial_value) return initial_value;
-  const { multi } = field as FieldPluralable;
+  const { multi } = field as FieldAppendable;
   if (multi) {
     if (typeof multi === 'object' && multi.min)
       return Array.from(Array(multi.min)).map(() => '');
@@ -57,7 +57,7 @@ function genInputHTMLComponent(field: Field) {
   if (placeholder_text) inputAttrs.push(`placeholder="${placeholder_text}"`);
   if (
     valid_if &&
-    !validateCond(type, (field as FieldPluralable).multi, '', valid_if)
+    !validateCond(type, (field as FieldAppendable).multi, '', valid_if)
   )
     fieldAttrs.push(`required`);
   if (supplemental_text)
@@ -67,7 +67,7 @@ function genInputHTMLComponent(field: Field) {
   inputAttrs.push(`{...props}`);
 
   const inputHTMLName =
-    (field as FieldPluralable).multi === true
+    (field as FieldAppendable).multi === true
       ? 'MultiInputHTML'
       : 'SingleInputHTML';
   function getFieldComponentName() {}
