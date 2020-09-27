@@ -8,7 +8,6 @@ import {
   HTMLTextboxLikeField,
   validateCond,
 } from '@omega/core';
-import { MultiInputHTML } from '@omega/runtime';
 import React from 'react';
 import { getFieldValueType } from './ast/field';
 import { program } from '@babel/types';
@@ -251,8 +250,8 @@ export function genForm(schema: Application) {
           members: fields.map(({ field_id, type }) => ({
             type: 'TSPropertySignature',
             key: {
-              type: 'Identifier',
-              name: field_id,
+              type: 'StringLiteral',
+              value: field_id,
             },
             computed: false,
             typeAnnotation: {
