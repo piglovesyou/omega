@@ -5,7 +5,9 @@ fields:
     - field_id: name
       type: text
       label: Name
-      multi: true
+      multi:
+          min: 2
+          max: 5
       placeholder_text: Carrie Mathison
       valid_if:
           $required: true

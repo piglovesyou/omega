@@ -8,6 +8,8 @@ import {
   HTMLTextboxLikeField,
   validateCond,
 } from '@omega/core';
+import { MultiInputHTML } from '@omega/runtime';
+import React from 'react';
 import { getFieldValueType } from './ast/field';
 import { program } from '@babel/types';
 import { parseExpression, ParserOptions } from '@babel/parser';
@@ -66,10 +68,9 @@ function genInputHTMLComponent(field: Field) {
   fieldAttrs.push(`{...props}`);
   inputAttrs.push(`{...props}`);
 
-  const inputHTMLName =
-    (field as FieldAppendable).multi === true
-      ? 'MultiInputHTML'
-      : 'SingleInputHTML';
+  const inputHTMLName = (field as FieldAppendable).multi
+    ? 'MultiInputHTML multi={(fieldMap.get(props.name) as FieldAppendable).multi}'
+    : 'SingleInputHTML';
   function getFieldComponentName() {}
 
   switch (type) {

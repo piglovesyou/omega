@@ -1,4 +1,5 @@
-import React, { InputHTMLAttributes, FC, useState } from 'react';
+import { AppendableOpts } from '@omega/core';
+import React, { InputHTMLAttributes, FC, useState, useMemo } from 'react';
 import { FieldArray, useField, useFormikContext } from 'formik';
 
 export type InputHTMLAttributesStrict = InputHTMLAttributes<
@@ -36,12 +37,19 @@ export const SingleInputHTML: FC<InputHTMLAttributesStrictWithName> = ({
   );
 };
 
-export const MultiInputHTML: FC<InputHTMLAttributesStrictWithName> = ({
-  component,
-  ...attributes
-}) => {
+export const MultiInputHTML: FC<
+  InputHTMLAttributesStrictWithName & {
+    multi: AppendableOpts;
+  }
+> = ({ component, multi, ...attributes }) => {
+  if (!multi) throw new Error('never');
   const { name } = attributes;
   const [{ value }] = useField(name);
+  const [removable, addable] = useMemo(() => {
+    const min = (typeof multi === 'object' && multi.min) || 0;
+    const max = (typeof multi === 'object' && multi.max) || Infinity;
+    return [value.length > min, value.length < max];
+  }, [value.length]);
   return (
     <>
       <FieldArray
@@ -58,22 +66,26 @@ export const MultiInputHTML: FC<InputHTMLAttributesStrictWithName> = ({
                     value={v}
                     name={itemName}
                   />
-                  <button
-                    type="button"
-                    className="omega-form__button omega-form__button--link"
-                    onClick={() => arrayHelpers.remove(index)}
-                  >
-                    Remove
-                  </button>
-                  <button
-                    type="button"
-                    className="omega-form__button omega-form__button--link"
-                    onClick={() => {
-                      arrayHelpers.insert(index + 1, '');
-                    }} // insert an empty string at a position
-                  >
-                    Add
-                  </button>
+                  {removable && (
+                    <button
+                      type="button"
+                      className="omega-form__button omega-form__button--link"
+                      onClick={() => arrayHelpers.remove(index)}
+                    >
+                      Remove
+                    </button>
+                  )}
+                  {addable && (
+                    <button
+                      type="button"
+                      className="omega-form__button omega-form__button--link"
+                      onClick={() => {
+                        arrayHelpers.insert(index + 1, '');
+                      }} // insert an empty string at a position
+                    >
+                      Add
+                    </button>
+                  )}
                 </div>
               );
             })
