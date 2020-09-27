@@ -1,6 +1,6 @@
 import { validateCond } from './cond';
 import { Cond } from './types/cond';
-import { AllowedFieldTypes } from './types/field';
+import { AllowedFieldTypes, FieldMultiOpts } from './types/field';
 
 const testTypes = [
   'text',
@@ -47,19 +47,22 @@ const testConds: Cond[] = [
   { $not: { $gte: 8, $integer: true } },
 ];
 
-const cases: [string, any, Cond][] = [];
+const cases: [string, FieldMultiOpts, any, Cond][] = [];
 for (const t of testTypes)
-  for (const v of testValues) for (const c of testConds) cases.push([t, v, c]);
+  for (const m of [true, false, { min: 1, max: 3 }])
+    for (const v of testValues)
+      for (const c of testConds) cases.push([t, m, v, c]);
 
 // const x: [string, any, Cond][] = [
 //     ["text", "", { '$required': true } ],
 // ]
 
-test.each(cases)('testCond %p, %p, %o', (type, value, cond) => {
+test.each(cases)('testCond %p, %p, %o', (type, multi, value, cond) => {
   const errorMessages: string[] = [];
   try {
     const isValid = validateCond(
       type as AllowedFieldTypes,
+      multi,
       value,
       cond,
       errorMessages,

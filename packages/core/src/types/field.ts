@@ -7,7 +7,6 @@ export interface FieldBase<FieldType> {
   type: FieldType;
   field_id: string;
   label: string;
-  placeholder_text?: string | number;
   supplemental_text?: string;
   initial_value?: TPrimitive | TPrimitive[];
   valid_if?: Cond;
@@ -15,48 +14,63 @@ export interface FieldBase<FieldType> {
   disabled_if?: CondRoot;
 }
 
+export type FieldMultiOpts =
+  | boolean
+  | {
+      min?: number;
+      max?: number;
+      required?: boolean;
+    }
+  | undefined;
+
+// TODO: This seems not good design, reconsider
+// TODO: use "Appendable"
 export interface FieldPluralable {
-  multi?:
-    | boolean
-    | {
-        min?: number;
-        max?: number;
-      };
+  multi?: FieldMultiOpts;
 }
 
 /**
  * Concrete field types
  */
-export type HTMLInputField = FieldBase<
+export type HTMLTextboxLikeField = FieldBase<
   | 'text'
   | 'email'
   | 'url'
   | 'uuid'
   | 'number'
-  | 'checkbox'
   | 'date'
   | 'datetime-local'
   | 'time'
   | 'month'
   | 'color'
   | 'tel'
-  | 'radio'
   | 'range'
   // | 'week' // We don't support this, it's not valid date in yup
 > &
-  FieldPluralable;
+  FieldPluralable & {
+    placeholder_text?: string | number;
+  };
 
-export type HTMLRadioField = FieldBase<'radio'>;
-
-export type HTMLSelectField = FieldBase<'select'> & {
+// TODO: "options" should be iterable, not hashed map
+export type HTMLRadioField = FieldBase<'radio'> & {
   options: { [value: string]: /* optionlabel */ string };
-} & FieldPluralable;
+};
+
+export type HTMLCheckboxField = FieldBase<'checkbox'> & {
+  options?: { [value: string]: /* optionlabel */ string };
+};
+
+export type HTMLSelectField = FieldBase<'select'> &
+  FieldPluralable & {
+    options: { [value: string]: /* optionlabel */ string };
+  };
 
 export type HTMLTextareaField = FieldBase<'textarea'> & FieldPluralable;
 
 export type Field =
-  | HTMLInputField
+  | HTMLTextboxLikeField
   | HTMLRadioField
+  | HTMLCheckboxField
   | HTMLSelectField
   | HTMLTextareaField;
 

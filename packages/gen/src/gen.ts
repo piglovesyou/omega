@@ -1,5 +1,14 @@
-import { Application, Field, HTMLSelectField, validateCond } from '@omega/core';
-import { getFieldType } from './ast/field';
+import {
+  Application,
+  Field,
+  FieldPluralable,
+  HTMLCheckboxField,
+  HTMLRadioField,
+  HTMLSelectField,
+  HTMLTextboxLikeField,
+  validateCond,
+} from '@omega/core';
+import { getFieldValueType } from './ast/field';
 import { program } from '@babel/types';
 import { parseExpression, ParserOptions } from '@babel/parser';
 import generate from '@babel/generator';
@@ -16,20 +25,40 @@ function getComponentName(fieldId: string) {
   return `${pascalCase(fieldId)}FieldComponent`;
 }
 
+function getInitialValue(field: Field) {
+  const { initial_value } = field;
+  if (initial_value) return initial_value;
+  const { multi } = field as FieldPluralable;
+  if (multi) {
+    if (typeof multi === 'object' && multi.min)
+      return Array.from(Array(multi.min)).map(() => '');
+    return [''];
+  }
+  return '';
+}
+
+function getInitialValues(fields: Field[]) {
+  return fields.reduce((acc, field) => {
+    const { field_id } = field;
+    return {
+      ...acc,
+      [field_id]: getInitialValue(field),
+    };
+  }, {} as Record<string, any>);
+}
+
 function genInputHTMLComponent(field: Field) {
-  const {
-    type,
-    disabled_if,
-    supplemental_text,
-    placeholder_text,
-    valid_if,
-  } = field;
+  const { type, disabled_if, supplemental_text, valid_if } = field;
+  const { placeholder_text } = field as HTMLTextboxLikeField;
   const inputAttrs: string[] = [];
   const fieldAttrs: string[] = [];
 
   if (disabled_if) inputAttrs.push(`disabled={disabled}`);
   if (placeholder_text) inputAttrs.push(`placeholder="${placeholder_text}"`);
-  if (valid_if && !validateCond(type, '', valid_if))
+  if (
+    valid_if &&
+    !validateCond(type, (field as FieldPluralable).multi, '', valid_if)
+  )
     fieldAttrs.push(`required`);
   if (supplemental_text)
     fieldAttrs.push(`supplementalText="${supplemental_text}"`);
@@ -38,28 +67,81 @@ function genInputHTMLComponent(field: Field) {
   inputAttrs.push(`{...props}`);
 
   const inputHTMLName =
-    (field as any).multi! === true ? 'MultiInputHTML' : 'SingleInputHTML';
+    (field as FieldPluralable).multi === true
+      ? 'MultiInputHTML'
+      : 'SingleInputHTML';
+  function getFieldComponentName() {}
 
   switch (type) {
-    case 'date':
-    case 'checkbox':
-    case 'number':
-    case 'uuid':
     case 'text':
     case 'email':
     case 'url':
+    case 'uuid':
+    case 'number':
+    case 'date':
+    case 'datetime-local':
+    case 'time':
+    case 'month':
+    case 'color':
+    case 'tel':
+    case 'range':
       return `<InputFieldComponent ${fieldAttrs.join('\n')}>
                 <${inputHTMLName} component="input" ${inputAttrs.join('\n')} />
               </InputFieldComponent>`;
+
+    case 'checkbox': {
+      const { options, field_id } = field as HTMLCheckboxField;
+      if (!options) {
+        return `<InputFieldComponent ${fieldAttrs.join('\n')}>
+                  <SingleInputHTML component="input" ${inputAttrs.join('\n')} />
+                </InputFieldComponent>`;
+      }
+      const entries = Array.from(Object.entries(options));
+      return `<InputFieldComponent ${fieldAttrs.join('\n')}>
+                ${entries.map(([value, label]) => {
+                  // TODO: should be `${field_id}.${index}`
+                  return `
+                    <label>
+                        <SingleFieldComponent component="input"
+                                              ${inputAttrs.join('\n')}
+                                              name="${field_id}.${value}"
+                        />
+                        <span>${label}</span>
+                    </label>
+                  `;
+                })}
+              </InputFieldComponent>`;
+    }
+
     case 'select': {
       const { options } = field as HTMLSelectField;
-      const optionEntires = Array.from(Object.entries(options));
+      const entries = Array.from(Object.entries(options));
       return `<InputFieldComponent ${fieldAttrs.join('\n')} >
                 <${inputHTMLName} component="select" ${inputAttrs.join('\n')}>
-                  ${optionEntires
+                  ${entries
                     .map(
                       ([value, label]) =>
                         `<option value="${value}">${label}</option>`,
+                    )
+                    .join('\n')}
+                </${inputHTMLName}>
+              </InputFieldComponent>`;
+    }
+    case 'radio': {
+      const { options, field_id } = field as HTMLRadioField;
+      const entries = Array.from(Object.entries(options));
+      return `<InputFieldComponent ${fieldAttrs.join('\n')} >
+                <SingleInputHTML component="select" ${inputAttrs.join('\n')}>
+                  ${entries
+                    .map(
+                      ([value, label]) =>
+                        `<label>
+                                <SingleInputHTML value="${value}"
+                                                 name="${field_id}"
+                                                 type="${type}"
+                                / >
+                                <span>${label}</span>
+                             </label>`,
                     )
                     .join('\n')}
                 </${inputHTMLName}>
@@ -145,9 +227,9 @@ export function genForm(schema: Application) {
         'InputFieldProps',
         'createValidator',
         'testCondRoot',
-        'InputFieldComponent',
         'SingleInputHTML',
         'MultiInputHTML',
+        'InputFieldComponent',
       ],
       '@omega/runtime',
     ),
@@ -174,7 +256,7 @@ export function genForm(schema: Application) {
             computed: false,
             typeAnnotation: {
               type: 'TSTypeAnnotation',
-              typeAnnotation: getFieldType(type),
+              typeAnnotation: getFieldValueType(type),
             },
           })),
         },
@@ -334,7 +416,7 @@ export function genForm(schema: Application) {
   `
       : ''
   }
-  
+
   ${
     disabled_if
       ? `
@@ -356,7 +438,7 @@ export function genForm(schema: Application) {
   }
 
   ${shown_if ? `if (!shown) return <></>;` : ''}
-  
+
   return ${genInputHTMLComponent(field)};
 }
 
@@ -473,13 +555,7 @@ export function genForm(schema: Application) {
     <Formik
         validate={createValidator(fieldMap)}
         initialValues={${JSON.stringify(
-          fields.reduce((acc, field) => {
-            const { field_id, initial_value } = field;
-            return {
-              ...acc,
-              [field_id]: initial_value || (field as any).multi ? [''] : '',
-            };
-          }, {} as any),
+          getInitialValues(fields),
           undefined,
           2,
         )} as any}

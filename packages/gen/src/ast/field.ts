@@ -5,7 +5,7 @@ import {
 } from '@babel/types';
 import { AllowedFieldTypes } from '@omega/core';
 
-export function getFieldType(type: AllowedFieldTypes) {
+export function getFieldValueType(type: AllowedFieldTypes) {
   switch (type) {
     case 'text':
     case 'email':

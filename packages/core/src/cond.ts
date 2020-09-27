@@ -1,7 +1,17 @@
 import { MixedSchema, Schema, ValidationError } from 'yup';
 import * as yup from 'yup';
 import { Cond, CondForTypes, MixedCond, NestCond } from './types/cond';
-import { AllowedFieldTypes } from './types/field';
+import { AllowedFieldTypes, FieldMultiOpts } from './types/field';
+
+function wrapAsMulti(v: Schema<any>, multi: FieldMultiOpts) {
+  let m = yup.array();
+  if (typeof multi === 'object') {
+    if (multi.required) m = m.required();
+    if (multi.min) m = m.min(multi.min);
+    if (multi.max) m = m.max(multi.max);
+  }
+  return m.of(v);
+}
 
 function getValidatorForType(type: AllowedFieldTypes) {
   switch (type) {
@@ -51,6 +61,7 @@ function validate(valid: Schema<any>, val: any, messages: string[]): boolean {
 
 function validateCondRecur(
   type: AllowedFieldTypes,
+  multi: FieldMultiOpts,
   val: any,
   conds: Cond,
   messages: string[],
@@ -62,7 +73,13 @@ function validateCondRecur(
   if ($and) {
     if (
       !Object.entries($and).every(([condK, condV]) => {
-        return validateCondRecur(type, val, { [condK]: condV }, messages);
+        return validateCondRecur(
+          type,
+          multi,
+          val,
+          { [condK]: condV },
+          messages,
+        );
       })
     )
       return false;
@@ -70,7 +87,13 @@ function validateCondRecur(
   if ($or) {
     if (
       !Object.entries($or).some(([condK, condV]) => {
-        return validateCondRecur(type, val, { [condK]: condV }, messages);
+        return validateCondRecur(
+          type,
+          multi,
+          val,
+          { [condK]: condV },
+          messages,
+        );
       })
     )
       return false;
@@ -78,7 +101,7 @@ function validateCondRecur(
   if ($not) {
     if (
       Object.entries($not).every(([condK, condV]) => {
-        return validateCondRecur(type, val, { [condK]: condV }, []); // $not should not load error messages
+        return validateCondRecur(type, multi, val, { [condK]: condV }, []); // $not should not load error messages
       })
     )
       return false;
@@ -131,15 +154,17 @@ function validateCondRecur(
   if ($length) valid = (valid as yup.StringSchema).length($length);
   if ($integer) valid = (valid as yup.NumberSchema).integer();
 
+  if (multi) return validate(wrapAsMulti(valid, multi), val, messages);
   return validate(valid, val, messages);
 }
 
 export function validateCond(
   type: AllowedFieldTypes,
+  multi: FieldMultiOpts,
   val: any,
   cond: Cond,
   messages: string[] = [],
 ): boolean {
   if (!validate(getValidatorForType(type), val, messages)) return false;
-  return validateCondRecur(type, val, cond, messages);
+  return validateCondRecur(type, multi, val, cond, messages);
 }

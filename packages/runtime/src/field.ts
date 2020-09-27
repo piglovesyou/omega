@@ -1,15 +1,24 @@
-import { validateCond, CondRoot, FieldMap } from '@omega/core';
+import { validateCond, CondRoot, FieldMap, FieldPluralable } from '@omega/core';
 
 type Values = { [field_id: string]: any };
 
 export function createValidator(fieldMap: FieldMap) {
   return (values: Values) => {
     const errors: { [field_id: string]: string } = {};
-    for (const [fieldId, { type, valid_if }] of fieldMap) {
+    for (const [fieldId, field] of fieldMap) {
+      const { type, valid_if } = field;
       if (!valid_if) continue;
       const val = values[fieldId];
       const messages: string[] = [];
-      if (!validateCond(type, val, valid_if, messages))
+      if (
+        !validateCond(
+          type,
+          (field as FieldPluralable).multi,
+          val,
+          valid_if,
+          messages,
+        )
+      )
         errors[fieldId] = messages[0];
     }
     return errors;
@@ -22,9 +31,16 @@ export function testCondRoot(
   fieldMap: FieldMap,
 ) {
   for (const [fieldId, cond] of Object.entries(condRoot)) {
-    const { type } = fieldMap.get(fieldId)!;
+    const field = fieldMap.get(fieldId)!;
+    const { type } = field;
     if (!type) throw new Error('never');
-    const valid = validateCond(type, values[fieldId], cond, []);
+    const valid = validateCond(
+      type,
+      (field as FieldPluralable).multi,
+      values[fieldId],
+      cond,
+      [],
+    );
     if (!valid) return false;
   }
   return true;
