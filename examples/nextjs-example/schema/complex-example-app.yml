@@ -1,5 +1,5 @@
-application_id: user-account
-label: User Account
+application_id: complex-example-app
+label: ""
 version: 1
 fields:
     - field_id: str

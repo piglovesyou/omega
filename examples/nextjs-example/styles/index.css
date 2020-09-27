@@ -11,7 +11,14 @@ a[href]:hover { @apply text-blue-700 underline }
 .my-form { @apply my-16 mx-16 max-w-lg }
 @screen sm { .my-form { @apply mx-auto } }
 .my-trailing-text { @apply text-gray-600; }
-.omega-form { @apply mb-40; }
+.omega-form-tab { @apply mt-8 mb-40 border-t border-gray-500}
+.omega-form-tab-item {
+    @apply px-3 leading-7 rounded rounded-t-none text-blue-600 border border-t-0 border-transparent;
+    margin-top: -1px;
+    outline: none !important;
+}
+.omega-form-tab-item--selected {@apply border-gray-500 bg-white }
+.omega-form-tab-item:hover { @apply text-blue-700 bg-gray-200  }
 
 /* Library side style */
 .omega-form__fields { @apply grid grid-cols-1 }
@@ -26,7 +33,8 @@ a[href]:hover { @apply text-blue-700 underline }
 .omega-field__input input { @apply leading-7 }
 .omega-field__input select { min-height: 1.75em; }
 
-.omega-input-arrayitem { @apply flex pb-2 }
+.omega-input-arrayitem { @apply flex mb-2 }
+.omega-input-arrayitem:last-of-type { @apply mb-0 }
 
 .omega-field__input input:not([type="checkbox"]),
 .omega-field__input select { @apply w-full  }

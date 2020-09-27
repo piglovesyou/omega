@@ -1,0 +1,87 @@
+application_id: all-types-example-app
+label: ""
+version: 1
+fields:
+    - field_id: text
+      type: text
+      label: Text
+      placeholder_text: Placeholder
+      supplemental_text: Required more than 2 letters
+      valid_if:
+          $required: true
+          $gte: 2
+
+    - field_id: text-multi
+      type: text
+      label: Multiple texts
+      multi:
+          min: 2
+          max: 5
+      placeholder_text: Placeholder
+      valid_if:
+          $required: true
+          $gte: 2
+
+    - field_id: number
+      type: number
+      label: Number
+      placeholder_text: 20
+      supplemental_text: Needs to be 5+
+      valid_if:
+          $required: true
+          $gte: 5
+
+    - field_id: number-multi
+      type: number
+      label: Multiple numbers
+      multi:
+          min: 1
+          max: 5
+      placeholder_text: 20
+      supplemental_text: Needs to be 5+
+      valid_if:
+          $required: true
+          $gte: 5
+#    - field_id: feeling
+#      type: select
+#      label: Feeling
+#      options:
+#          na: N/A
+#          happy: Happy
+#          bad: Bad
+#
+#    - field_id: checkbox
+#      type: checkbox
+#      label: Happy
+#
+#    - field_id: favorite_drama
+#      label: Favorite drama
+#      placeholder_text: Homeland
+#      supplemental_text: Shown if you're a good guy and 20+ age
+#      type: text
+#      multi: true
+#      shown_if:
+#          age:
+#              $gte: 20
+#          feeling:
+#              $eq: happy
+#
+#    - field_id: url
+#      type: url
+#      label: Favorite website
+#      placeholder_text: https://www.tumblr.com
+#      shown_if:
+#          age:
+#              $gte: 20
+#          feeling:
+#              $eq: happy
+#
+#    - field_id: email
+#      type: email
+#      label: E-mail
+#      placeholder_text: carrie@example.com
+#      shown_if:
+#          age:
+#              $gte: 20
+#          feeling:
+#              $eq: happy
