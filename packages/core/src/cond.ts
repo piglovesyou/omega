@@ -1,9 +1,9 @@
 import { MixedSchema, Schema, ValidationError } from 'yup';
 import * as yup from 'yup';
 import { Cond, CondForTypes, MixedCond, NestCond } from './types/cond';
-import { AllowedFieldTypes, FieldMultiOpts } from './types/field';
+import { AllowedFieldTypes, AppendableOpts } from './types/field';
 
-function wrapAsMulti(v: Schema<any>, multi: FieldMultiOpts) {
+function wrapAsMulti(v: Schema<any>, multi: AppendableOpts) {
   let m = yup.array();
   if (typeof multi === 'object') {
     if (multi.required) m = m.required();
@@ -61,7 +61,7 @@ function validate(valid: Schema<any>, val: any, messages: string[]): boolean {
 
 function validateCondRecur(
   type: AllowedFieldTypes,
-  multi: FieldMultiOpts,
+  multi: AppendableOpts,
   val: any,
   conds: Cond,
   messages: string[],
@@ -160,7 +160,7 @@ function validateCondRecur(
 
 export function validateCond(
   type: AllowedFieldTypes,
-  multi: FieldMultiOpts,
+  multi: AppendableOpts,
   val: any,
   cond: Cond,
   messages: string[] = [],

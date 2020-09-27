@@ -1,6 +1,6 @@
 import { validateCond } from './cond';
 import { Cond } from './types/cond';
-import { AllowedFieldTypes, FieldMultiOpts } from './types/field';
+import { AllowedFieldTypes, AppendableOpts } from './types/field';
 
 const testTypes = [
   'text',
@@ -47,7 +47,7 @@ const testConds: Cond[] = [
   { $not: { $gte: 8, $integer: true } },
 ];
 
-const cases: [string, FieldMultiOpts, any, Cond][] = [];
+const cases: [string, AppendableOpts, any, Cond][] = [];
 for (const t of testTypes)
   for (const m of [true, false, { min: 1, max: 3 }])
     for (const v of testValues)

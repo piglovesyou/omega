@@ -14,7 +14,7 @@ export interface FieldBase<FieldType> {
   disabled_if?: CondRoot;
 }
 
-export type FieldMultiOpts =
+export type AppendableOpts =
   | boolean
   | {
       min?: number;
@@ -24,9 +24,8 @@ export type FieldMultiOpts =
   | undefined;
 
 // TODO: This seems not good design, reconsider
-// TODO: use "Appendable"
-export interface FieldPluralable {
-  multi?: FieldMultiOpts;
+export interface FieldAppendable {
+  multi?: AppendableOpts;
 }
 
 /**
@@ -47,7 +46,7 @@ export type HTMLTextboxLikeField = FieldBase<
   | 'range'
   // | 'week' // We don't support this, it's not valid date in yup
 > &
-  FieldPluralable & {
+  FieldAppendable & {
     placeholder_text?: string | number;
   };
 
@@ -61,11 +60,11 @@ export type HTMLCheckboxField = FieldBase<'checkbox'> & {
 };
 
 export type HTMLSelectField = FieldBase<'select'> &
-  FieldPluralable & {
+  FieldAppendable & {
     options: { [value: string]: /* optionlabel */ string };
   };
 
-export type HTMLTextareaField = FieldBase<'textarea'> & FieldPluralable;
+export type HTMLTextareaField = FieldBase<'textarea'> & FieldAppendable;
 
 export type Field =
   | HTMLTextboxLikeField
