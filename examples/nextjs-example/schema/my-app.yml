@@ -2,39 +2,45 @@ application_id: user-account
 label: User Account
 version: 1
 fields:
-    - field_id: name
+    - field_id: str
       type: text
-      label: Name
+      label: Text
+      placeholder_text: Hello!
+      supplemental_text: Required more than 2 letters
+      valid_if:
+          $required: true
+          $gte: 2
+
+    - field_id: multi-str
+      type: text
+      label: Multi text
       multi:
           min: 2
           max: 5
-      placeholder_text: Carrie Mathison
+      placeholder_text: Baa
+      supplemental_text: Required 2-5 values
       valid_if:
           $required: true
-
-    - field_id: date
-      type: date
-      multi: true
-      label: Birthday
+          $gte: 2
 
     - field_id: age
       type: number
       label: Age
-      placeholder_text: 15
-      supplemental_text: Needs to be 20+
+      placeholder_text: 20
+      supplemental_text: Needs to be 5+
       valid_if:
           $required: true
-          $gte: 20
+          $gte: 5
 
-    - field_id: sex
+    - field_id: feeling
       type: select
-      label: Sex
+      label: Feeling
       options:
-          female: Female
-          male: Male
           na: N/A
+          happy: Happy
+          bad: Bad
 
-    - field_id: happy
+    - field_id: checkbox
       type: checkbox
       label: Happy
 
@@ -43,11 +49,12 @@ fields:
       placeholder_text: Homeland
       supplemental_text: Shown if you're a good guy and 20+ age
       type: text
+      multi: true
       shown_if:
           age:
               $gte: 20
-          happy:
-              $eq: true
+          feeling:
+              $eq: happy
 
     - field_id: url
       type: url
@@ -56,8 +63,8 @@ fields:
       shown_if:
           age:
               $gte: 20
-          happy:
-              $eq: true
+          feeling:
+              $eq: happy
 
     - field_id: email
       type: email
@@ -66,5 +73,5 @@ fields:
       shown_if:
           age:
               $gte: 20
-          happy:
-              $eq: true
+          feeling:
+              $eq: happy
