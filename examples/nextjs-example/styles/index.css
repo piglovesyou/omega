@@ -40,7 +40,7 @@ a[href]:hover { @apply text-blue-700 underline }
 .omega-field textarea { @apply w-full  }
 .omega-field--checkbox .omega-field__input label,
 .omega-field--radio .omega-field__input label { @apply mr-4 }
-.omega-input-arrayitem { @apply flex mb-2 }
+.omega-input-arrayitem { @apply flex items-center mb-2 }
 .omega-input-arrayitem:last-of-type { @apply mb-0 }
 .omega-field input[type="color"] { min-width: 2em }
 

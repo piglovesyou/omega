@@ -32,7 +32,7 @@ export interface FieldAppendable {
  * Concrete field types
  */
 export type HTMLTextboxLikeField = FieldBase<
-  'text' | 'email' | 'url' | 'uuid' | 'number' | 'tel'
+  'text' | 'email' | 'url' | 'uuid' | 'number' | 'tel' | 'textarea'
   // | 'week' // We don't support this, it's not valid date in yup
 > &
   FieldAppendable & {
@@ -58,15 +58,12 @@ export type HTMLSelectField = FieldBase<'select'> &
     options: { [value: string]: /* optionlabel */ string };
   };
 
-export type HTMLTextareaField = FieldBase<'textarea'> & FieldAppendable;
-
 export type Field =
   | HTMLTextboxLikeField
   | HTMLWidgetLikeField
   | HTMLRadioField
   | HTMLCheckboxField
-  | HTMLSelectField
-  | HTMLTextareaField;
+  | HTMLSelectField;
 
 export type AllowedFieldTypes = Field['type'];
 

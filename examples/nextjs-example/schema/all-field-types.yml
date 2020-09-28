@@ -235,7 +235,20 @@ fields:
       type: textarea
       label: Textarea
       initial_value: Yeah
-      supplemental_text: Required to be 10+ letters
+      placeholder_text: Write something
+      valid_if:
+          $gte: 10
+
+    - field_id: textarea-multi
+      type: textarea
+      label: Multiple textarea
+      initial_value:
+          - Ohh
+          - Yeah
+      multi:
+          min: 1
+          max: 5
+      placeholder_text: Write something
       valid_if:
           $gte: 10
 #    - field_id: checkbox
