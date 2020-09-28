@@ -215,7 +215,21 @@ fields:
           happy: Happy
           bad: Bad
       valid_if:
-          $eq: happy
+          $in:
+              - happy
+              - bad
+
+    - field_id: radio
+      type: radio
+      label: Radio
+      options:
+          na: N/A
+          happy: Happy
+          bad: Bad
+      valid_if:
+          $in:
+              - happy
+              - bad
 #    - field_id: checkbox
 #      type: checkbox
 #      label: Happy

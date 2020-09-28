@@ -23,8 +23,8 @@ a[href]:hover { @apply text-blue-700 underline }
 /* Library side style */
 .omega-form__fields { @apply grid grid-cols-1 }
 .omega-field { @apply mb-5 }
-.omega-field label { @apply leading-7 }
-.omega-field--required label span::after { content: '＊'; @apply text-red-600 text-xs align-top;}
+.omega-field > label { @apply leading-7 }
+.omega-field--required > label span::after { content: '＊'; @apply text-red-600 text-xs align-top;}
 .omega-field input,
 .omega-field select { @apply px-1 border-gray-900 border border-solid rounded-sm; }
 .omega-field input::placeholder { @apply text-gray-600; }
@@ -36,7 +36,7 @@ a[href]:hover { @apply text-blue-700 underline }
 .omega-input-arrayitem { @apply flex mb-2 }
 .omega-input-arrayitem:last-of-type { @apply mb-0 }
 
-.omega-field__input input:not([type="checkbox"]),
+.omega-field__input input:not([type="checkbox"]):not([type="radio"]),
 .omega-field__input select { @apply w-full  }
 .omega-field__input input[type="color"] { min-width: 2em }
 .omega-field--checkbox .omega-field__input label,
@@ -45,9 +45,9 @@ a[href]:hover { @apply text-blue-700 underline }
 .omega-field__message { @apply text-red-600 ; }
 @screen sm {
     .omega-field { @apply flex }
-    .omega-field label { @apply w-32 items-center; }
+    .omega-field > label { @apply w-32 items-center; }
     .omega-field__input { @apply flex-1; }
-    .omega-field__input input:not([type="checkbox"]),
+    .omega-field__input input:not([type="checkbox"]):not([type="radio"]),
     .omega-field__input select { @apply w-auto  }
 }
 
