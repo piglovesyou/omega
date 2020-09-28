@@ -12,13 +12,20 @@ export function getFieldValueType(type: AllowedFieldTypes) {
     case 'url':
     case 'uuid':
     case 'select':
+    case 'date':
+    case 'datetime-local':
+    case 'time':
+    case 'month':
+    case 'color':
+    case 'tel':
+    case 'radio':
+    case 'textarea':
       return tsStringKeyword();
     case 'number':
+    case 'range':
       return tsNumberKeyword();
     case 'checkbox':
       return tsBooleanKeyword();
-    case 'date':
-      return tsStringKeyword();
     default:
       throw new Error(`Never: ${type} is not a valid field.type.`);
   }

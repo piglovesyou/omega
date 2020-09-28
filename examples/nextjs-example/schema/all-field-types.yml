@@ -2,46 +2,175 @@ application_id: all-field-types
 label: ""
 version: 1
 fields:
-    - field_id: text
-      type: text
-      label: Text
-      placeholder_text: Placeholder
-      supplemental_text: Required more than 2 letters
-      valid_if:
-          $required: true
-          $gte: 2
+    #    - field_id: text
+    #      type: text
+    #      label: Text
+    #      placeholder_text: A placeholder text
+    #      supplemental_text: A supplemental text
+    #      valid_if:
+    #          $required: true
+    #          $gte: 2
+    #
+    #    - field_id: text-multi
+    #      type: text
+    #      label: Multiple texts
+    #      placeholder_text: A placeholder text
+    #      supplemental_text: A supplemental text
+    #      multi:
+    #          min: 1
+    #          max: 5
+    #      valid_if:
+    #          $required: true
+    #          $gte: 2
+    #
+    #    - field_id: number
+    #      type: number
+    #      label: Number
+    #      placeholder_text: 15
+    #      supplemental_text: Required to be 5+
+    #      valid_if:
+    #          $required: true
+    #          $gte: 5
+    #
+    #    - field_id: number-multi
+    #      type: number
+    #      label: Multiple numbers
+    #      multi:
+    #        min: 1
+    #        max: 5
+    #      placeholder_text: 15
+    #      supplemental_text: Required to be 5+
+    #      valid_if:
+    #        $required: true
+    #        $gte: 5
+    #
+    #    - field_id: email
+    #      type: email
+    #      label: E-mail address
+    #      placeholder_text: my@example.com
+    #      supplemental_text: With email verification
+    #      valid_if:
+    #        $required: true
+    #
+    #    - field_id: email-multi
+    #      type: email
+    #      label: Multiple e-mail addresses
+    #      placeholder_text: my@example.com
+    #      supplemental_text: With email verification
+    #      multi:
+    #        min: 1
+    #        max: 5
+    #      valid_if:
+    #        $required: true
+    #
+    #    - field_id: date
+    #      type: date
+    #      label: Date
+    #      supplemental_text: Required to be 2000+
+    #      valid_if:
+    #        $required: true
+    #
+    #    - field_id: date-multi
+    #      type: date
+    #      label: Multiple Date
+    #      supplemental_text: Required to be 2000+
+    #      multi:
+    #        min: 1
+    #        max: 5
+    #      valid_if:
+    #        $required: true
 
-    - field_id: text-multi
-      type: text
-      label: Multiple texts
-      multi:
-          min: 2
-          max: 5
-      placeholder_text: Placeholder
-      valid_if:
-          $required: true
-          $gte: 2
+    #    - field_id: datetime-local
+    #      type: datetime-local
+    #      label: Datetime local
+    #      supplemental_text: Required to be 2000+
+    #      valid_if:
+    #        $required: true
+    #
+    #    - field_id: datetime-local-multi
+    #      type: datetime-local
+    #      label: Multiple datetime local
+    #      supplemental_text: Required to be 2000+
+    #      valid_if:
+    #        $required: true
+    #      multi:
+    #        min: 1
+    #        max: 5
+    #
+    #    - field_id: time
+    #      type: time
+    #      label: Time
+    #      valid_if:
+    #        $required: true
+    #
+    #    - field_id: time-multi
+    #      type: time
+    #      label: Multiple time
+    #      valid_if:
+    #        $required: true
+    #      multi:
+    #        min: 1
+    #        max: 5
 
-    - field_id: number
-      type: number
-      label: Number
-      placeholder_text: 20
-      supplemental_text: Needs to be 5+
-      valid_if:
-          $required: true
-          $gte: 5
+    #    - field_id: month
+    #      type: month
+    #      label: Month
+    #      valid_if:
+    #        $required: true
+    #
+    #    - field_id: month-multi
+    #      type: month
+    #      label: Multiple month
+    #      valid_if:
+    #        $required: true
+    #      multi:
+    #        min: 1
+    #        max: 5
+    #
+    #    - field_id: color
+    #      type: color
+    #      label: Color
+    #      valid_if:
+    #        $required: true
+    #
+    #    - field_id: color-multi
+    #      type: color
+    #      label: Multiple color
+    #      valid_if:
+    #        $required: true
+    #      multi:
+    #        min: 1
+    #        max: 5
+    #
+    #    - field_id: tel
+    #      type: tel
+    #      label: Tel
+    #      valid_if:
+    #        $required: true
+    #
+    #    - field_id: tel-multi
+    #      type: tel
+    #      label: Multiple tel
+    #      valid_if:
+    #        $required: true
+    #      multi:
+    #        min: 1
+    #        max: 5
 
-    - field_id: number-multi
-      type: number
-      label: Multiple numbers
-      multi:
-          min: 1
-          max: 5
-      placeholder_text: 20
-      supplemental_text: Needs to be 5+
-      valid_if:
-          $required: true
-          $gte: 5
+    - field_id: radio
+      type: radio
+      label: Radio
+      options:
+          a: Apple
+          b: Bacon
+          c: Cola
+#    - field_id: datetime-local
+#      type: datetime-local
+#      label: Datetime Local
+#      supplemental_text: Required to be 2000+
+#      valid_if:
+#        $required: true
+
 #    - field_id: feeling
 #      type: select
 #      label: Feeling

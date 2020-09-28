@@ -38,6 +38,8 @@ a[href]:hover { @apply text-blue-700 underline }
 
 .omega-field__input input:not([type="checkbox"]),
 .omega-field__input select { @apply w-full  }
+.omega-field__input input[type="color"] { min-width: 2em }
+.omega-field--radio label { @apply mr-4 }
 .omega-field__supplemental-text { @apply inline-block text-xs text-gray-600; }
 .omega-field__message { @apply text-red-600 ; }
 @screen sm {

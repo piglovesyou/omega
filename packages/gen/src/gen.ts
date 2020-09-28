@@ -131,20 +131,19 @@ function genInputHTMLComponent(field: Field) {
       const { options, field_id } = field as HTMLRadioField;
       const entries = Array.from(Object.entries(options));
       return `<InputFieldComponent ${fieldAttrs.join('\n')} >
-                <SingleInputHTML component="select" ${inputAttrs.join('\n')}>
-                  ${entries
-                    .map(
-                      ([value, label]) =>
-                        `<label>
-                                <SingleInputHTML value="${value}"
-                                                 name="${field_id}"
-                                                 type="${type}"
-                                / >
-                                <span>${label}</span>
-                             </label>`,
-                    )
-                    .join('\n')}
-                </${inputHTMLName}>
+                ${entries
+                  .map(
+                    ([value, label]) =>
+                      `<label>
+                          <SingleInputHTML component="input"
+                                           value="${value}"
+                                           name="${field_id}"
+                                           type="${type}"
+                          / >
+                          <span>${label}</span>
+                       </label>`,
+                  )
+                  .join('\n')}
               </InputFieldComponent>`;
     }
     default:
