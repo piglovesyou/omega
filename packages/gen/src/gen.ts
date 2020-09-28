@@ -98,18 +98,20 @@ function genInputHTMLComponent(field: Field) {
       }
       const entries = Array.from(Object.entries(options));
       return `<InputFieldComponent ${fieldAttrs.join('\n')}>
-                ${entries.map(([value, label]) => {
-                  // TODO: should be `${field_id}.${index}`
-                  return `
+                ${entries
+                  .map(([value, label]) => {
+                    // TODO: should be `${field_id}.${index}`
+                    return `
                     <label>
-                        <SingleFieldComponent component="input"
-                                              ${inputAttrs.join('\n')}
-                                              name="${field_id}.${value}"
+                        <SingleInputHTML component="input"
+                                         ${inputAttrs.join('\n')}
+                                         name="${field_id}.${value}"
                         />
                         <span>${label}</span>
                     </label>
                   `;
-                })}
+                  })
+                  .join('\n')}
               </InputFieldComponent>`;
     }
 

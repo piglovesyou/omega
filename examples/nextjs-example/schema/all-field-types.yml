@@ -156,10 +156,22 @@ fields:
     #      multi:
     #        min: 1
     #        max: 5
+    #
+    #    - field_id: radio
+    #      type: radio
+    #      label: Radio
+    #      options:
+    #          a: Apple
+    #          b: Bacon
+    #          c: Cola
 
-    - field_id: radio
-      type: radio
-      label: Radio
+    - field_id: checkbox
+      type: checkbox
+      label: Checkbox
+
+    - field_id: checkbox-multi
+      type: checkbox
+      label: Multiple checkbox
       options:
           a: Apple
           b: Bacon
