@@ -118,6 +118,7 @@ function genInputHTMLComponent(field: Field) {
     },
   };
 
+  // TODO: refactor. "`<InputFieldComponent ${fieldAttrs.join('\n')}>" is always same
   switch (type) {
     case 'text':
     case 'email':
@@ -133,6 +134,13 @@ function genInputHTMLComponent(field: Field) {
     case 'range':
       return `<InputFieldComponent ${fieldAttrs.join('\n')}>
                 <${inputHTML.open} component="input" ${inputAttrs.join('\n')} />
+              </InputFieldComponent>`;
+
+    case 'textarea':
+      return `<InputFieldComponent ${fieldAttrs.join('\n')}>
+                <${inputHTML.open} component="textarea" ${inputAttrs.join(
+        '\n',
+      )} />
               </InputFieldComponent>`;
 
     case 'checkbox': {

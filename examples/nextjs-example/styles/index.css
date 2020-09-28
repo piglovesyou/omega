@@ -25,22 +25,25 @@ a[href]:hover { @apply text-blue-700 underline }
 .omega-field { @apply mb-5 }
 .omega-field > label { @apply leading-7 }
 .omega-field--required > label span::after { content: '＊'; @apply text-red-600 text-xs align-top;}
+
+/* Shared styles for input widgets */
 .omega-field input,
-.omega-field select { @apply px-1 border-gray-900 border border-solid rounded-sm; }
-.omega-field input::placeholder { @apply text-gray-600; }
-.omega-field__input input,
-.omega-field__input select { @apply  mr-1 align-middle; }
-.omega-field__input input { @apply leading-7 }
-.omega-field__input select { min-height: 1.75em; }
-
-.omega-input-arrayitem { @apply flex mb-2 }
-.omega-input-arrayitem:last-of-type { @apply mb-0 }
-
-.omega-field__input input:not([type="checkbox"]):not([type="radio"]),
-.omega-field__input select { @apply w-full  }
-.omega-field__input input[type="color"] { min-width: 2em }
+.omega-field select,
+.omega-field textarea { @apply px-1 border-gray-900 border border-solid rounded-sm mr-1 align-middle; }
+.omega-field input::placeholder,
+.omega-field textarea::placeholder { @apply text-gray-600; }
+/* Styles for each input widgets */
+.omega-field input { @apply leading-7 }
+.omega-field select { min-height: 1.75em; }
+.omega-field input:not([type="checkbox"]):not([type="radio"]),
+.omega-field select,
+.omega-field textarea { @apply w-full  }
 .omega-field--checkbox .omega-field__input label,
 .omega-field--radio .omega-field__input label { @apply mr-4 }
+.omega-input-arrayitem { @apply flex mb-2 }
+.omega-input-arrayitem:last-of-type { @apply mb-0 }
+.omega-field input[type="color"] { min-width: 2em }
+
 .omega-field__supplemental-text { @apply inline-block text-xs text-gray-600; }
 .omega-field__message { @apply text-red-600 ; }
 @screen sm {
