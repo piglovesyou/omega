@@ -176,13 +176,25 @@ fields:
           a: Apple
           b: Bacon
           c: Cola
-#    - field_id: datetime-local
-#      type: datetime-local
-#      label: Datetime Local
-#      supplemental_text: Required to be 2000+
-#      valid_if:
-#        $required: true
 
+    - field_id: range
+      type: range
+      label: Range
+      initial_value: 10
+      supplemental_text: Required to be 60+
+      valid_if:
+          $gt: 60
+
+    - field_id: range-multi
+      type: range
+      label: Multiple range
+      initial_value: 10
+      supplemental_text: Required to be 60+
+      multi:
+          min: 1
+          max: 5
+      valid_if:
+          $gt: 60
 #    - field_id: feeling
 #      type: select
 #      label: Feeling

@@ -32,23 +32,16 @@ export interface FieldAppendable {
  * Concrete field types
  */
 export type HTMLTextboxLikeField = FieldBase<
-  | 'text'
-  | 'email'
-  | 'url'
-  | 'uuid'
-  | 'number'
-  | 'date'
-  | 'datetime-local'
-  | 'time'
-  | 'month'
-  | 'color'
-  | 'tel'
-  | 'range'
+  'text' | 'email' | 'url' | 'uuid' | 'number' | 'tel'
   // | 'week' // We don't support this, it's not valid date in yup
 > &
   FieldAppendable & {
     placeholder_text?: string | number;
   };
+
+export type HTMLWidgetLikeField = FieldBase<
+  'range' | 'date' | 'datetime-local' | 'time' | 'month' | 'color'
+>;
 
 // TODO: "options" should be iterable, not hashed map
 export type HTMLRadioField = FieldBase<'radio'> & {
@@ -68,6 +61,7 @@ export type HTMLTextareaField = FieldBase<'textarea'> & FieldAppendable;
 
 export type Field =
   | HTMLTextboxLikeField
+  | HTMLWidgetLikeField
   | HTMLRadioField
   | HTMLCheckboxField
   | HTMLSelectField

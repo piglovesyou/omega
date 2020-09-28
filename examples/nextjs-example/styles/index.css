@@ -39,13 +39,13 @@ a[href]:hover { @apply text-blue-700 underline }
 .omega-field__input input:not([type="checkbox"]),
 .omega-field__input select { @apply w-full  }
 .omega-field__input input[type="color"] { min-width: 2em }
-.omega-field--checkbox label,
-.omega-field--radio label { @apply mr-4 }
+.omega-field--checkbox .omega-field__input label,
+.omega-field--radio .omega-field__input label { @apply mr-4 }
 .omega-field__supplemental-text { @apply inline-block text-xs text-gray-600; }
 .omega-field__message { @apply text-red-600 ; }
 @screen sm {
     .omega-field { @apply flex }
-    .omega-field label { @apply w-24 items-center; }
+    .omega-field label { @apply w-32 items-center; }
     .omega-field__input { @apply flex-1; }
     .omega-field__input input:not([type="checkbox"]),
     .omega-field__input select { @apply w-auto  }
