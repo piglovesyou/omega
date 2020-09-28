@@ -1,5 +1,5 @@
-import { Application } from '@omega/core';
-import { genForm } from './gen';
+import { Application, Field } from '@omega/core';
+import { genForm, getInitialValue } from './gen';
 
 const cases: Application[] = [
   {
@@ -45,3 +45,16 @@ const cases: Application[] = [
 ];
 
 test.each(cases)('genForm %p', (app) => expect(genForm(app)).toMatchSnapshot());
+
+const initialValueTestData: Field[] = [];
+for (const initial_value of [undefined, 'hello', ['a', 'b']])
+  for (const multi of [undefined, true, { min: 3 }])
+    initialValueTestData.push({ initial_value, multi } as Field);
+
+test.each(initialValueTestData)('getInitialValue %j', (field) => {
+  try {
+    expect(getInitialValue(field)).toMatchSnapshot();
+  } catch (e) {
+    expect(e).toMatchSnapshot();
+  }
+});

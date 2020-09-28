@@ -164,18 +164,18 @@ fields:
     #          a: Apple
     #          b: Bacon
     #          c: Cola
-
-    - field_id: checkbox
-      type: checkbox
-      label: Checkbox
-
-    - field_id: checkbox-multi
-      type: checkbox
-      label: Multiple checkbox
-      options:
-          a: Apple
-          b: Bacon
-          c: Cola
+    #
+    #    - field_id: checkbox
+    #      type: checkbox
+    #      label: Checkbox
+    #
+    #    - field_id: checkbox-multi
+    #      type: checkbox
+    #      label: Multiple checkbox
+    #      options:
+    #          a: Apple
+    #          b: Bacon
+    #          c: Cola
 
     - field_id: range
       type: range

@@ -41,7 +41,8 @@ export type HTMLTextboxLikeField = FieldBase<
 
 export type HTMLWidgetLikeField = FieldBase<
   'range' | 'date' | 'datetime-local' | 'time' | 'month' | 'color'
->;
+> &
+  FieldAppendable;
 
 // TODO: "options" should be iterable, not hashed map
 export type HTMLRadioField = FieldBase<'radio'> & {

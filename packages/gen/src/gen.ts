@@ -15,6 +15,7 @@ import { parseExpression, ParserOptions } from '@babel/parser';
 import generate from '@babel/generator';
 import { format } from 'prettier';
 import { pascalCase } from 'pascal-case';
+import { printError } from './lib/print';
 
 const parserOpts: ParserOptions = { plugins: ['typescript', 'jsx'] };
 
@@ -26,16 +27,50 @@ function getComponentName(fieldId: string) {
   return `${pascalCase(fieldId)}FieldComponent`;
 }
 
-function getInitialValue(field: Field) {
-  const { initial_value } = field;
-  if (initial_value) return initial_value;
+function arr(n: number) {
+  return Array.from(Array(n));
+}
+
+function hasMin(field: Field): boolean {
   const { multi } = field as FieldAppendable;
-  if (multi) {
-    if (typeof multi === 'object' && multi.min)
-      return Array.from(Array(multi.min)).map(() => '');
-    return [''];
+  return typeof multi === 'object' && typeof multi.min === 'number';
+}
+
+export function getInitialValue(field: Field) {
+  const { initial_value, type } = field;
+  const { multi } = field as FieldAppendable;
+
+  // "range" doesn't allow string initialization. XXX: Not sure it's the only exception.
+  const emptyValue = type === 'range' ? 50 : '';
+
+  if (initial_value === undefined) {
+    if (!multi) return emptyValue;
+    if (typeof multi === 'object' && typeof multi.min === 'number')
+      return arr(multi.min).map(() => emptyValue);
+    return [emptyValue];
   }
-  return '';
+
+  if (Array.isArray(initial_value)) {
+    if (!multi)
+      throw printError(
+        new Error(
+          `"${field.field_id}" is wrongly configured. initial_value can be an array only when it is multi value field.`,
+        ),
+      );
+    if (typeof multi === 'object' && typeof multi.min === 'number') {
+      const rv: any[] = [];
+      return arr(multi.min).map((_, i) => {
+        const initialValue = initial_value[i];
+        return initialValue !== undefined ? initialValue : emptyValue;
+      });
+    }
+    return initial_value;
+  }
+
+  if (!multi) return initial_value;
+  if (typeof multi === 'object' && typeof multi.min === 'number')
+    return arr(multi.min).map((_, i) => initial_value);
+  return [initial_value];
 }
 
 function getInitialValues(fields: Field[]) {

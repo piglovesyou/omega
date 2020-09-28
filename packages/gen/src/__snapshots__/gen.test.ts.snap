@@ -8,9 +8,9 @@ import {
   InputFieldProps,
   createValidator,
   testCondRoot,
-  InputFieldComponent,
   SingleInputHTML,
   MultiInputHTML,
+  InputFieldComponent,
 } from \\"@omega/runtime\\";
 
 /* Form value type */
@@ -104,9 +104,9 @@ import {
   InputFieldProps,
   createValidator,
   testCondRoot,
-  InputFieldComponent,
   SingleInputHTML,
   MultiInputHTML,
+  InputFieldComponent,
 } from \\"@omega/runtime\\";
 
 /* Form value type */
@@ -231,3 +231,52 @@ export const FormComponent: React.FC<FormComponentProps> = ({
 );
 "
 `;
+
+exports[`getInitialValue {"initial_value":"hello","multi":{"min":3}} 1`] = `
+Array [
+  "hello",
+  "hello",
+  "hello",
+]
+`;
+
+exports[`getInitialValue {"initial_value":"hello","multi":true} 1`] = `
+Array [
+  "hello",
+]
+`;
+
+exports[`getInitialValue {"initial_value":"hello"} 1`] = `"hello"`;
+
+exports[`getInitialValue {"initial_value":["a","b"],"multi":{"min":3}} 1`] = `
+Array [
+  "a",
+  "b",
+  "",
+]
+`;
+
+exports[`getInitialValue {"initial_value":["a","b"],"multi":true} 1`] = `
+Array [
+  "a",
+  "b",
+]
+`;
+
+exports[`getInitialValue {"initial_value":["a","b"]} 1`] = `[Error: "undefined" is wrongly configured. initial_value can be an array only when it is multi value field.]`;
+
+exports[`getInitialValue {"multi":{"min":3}} 1`] = `
+Array [
+  "",
+  "",
+  "",
+]
+`;
+
+exports[`getInitialValue {"multi":true} 1`] = `
+Array [
+  "",
+]
+`;
+
+exports[`getInitialValue {} 1`] = `""`;

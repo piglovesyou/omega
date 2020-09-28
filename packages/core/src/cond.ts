@@ -22,23 +22,30 @@ function getValidatorForType(type: AllowedFieldTypes) {
     case 'radio':
     case 'textarea':
       return yup.string();
+
     case 'email':
       return yup.string().email();
+
     case 'uuid':
       return yup.string().uuid();
+
     case 'url':
       return yup.string().url();
+
     case 'number':
     case 'range':
       return yup.number();
+
     case 'checkbox':
       return yup.boolean();
+
     // case 'week':
     case 'date':
     case 'datetime-local':
     case 'time':
     case 'month':
       return yup.date();
+
     default:
       throw new Error(`${type} is not a valid field.type.`);
   }
