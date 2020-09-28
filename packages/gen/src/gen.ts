@@ -270,7 +270,10 @@ export function genForm(schema: Application) {
       ['Formik', 'Form', 'useFormikContext', 'FormikConfig'],
       'formik',
     ),
-    getImportDeclaration(['FieldMap', 'Field'], '@omega/core'),
+    getImportDeclaration(
+      ['FieldMap', 'Field', 'FieldAppendable'],
+      '@omega/core',
+    ),
     getImportDeclaration(
       [
         'InputFieldProps',
@@ -599,6 +602,7 @@ export function genForm(schema: Application) {
                 },
               },
             },
+            // TODO: Use field-level validation, it seems faster
             init: expr(`
 ({children, ...props}) => (
     <Formik

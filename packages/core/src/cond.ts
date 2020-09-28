@@ -123,14 +123,20 @@ function validateCondRecur(
     $required,
     ...typeConds
   } = mixedConds as Required<MixedCond>;
+
   let mixedValid: MixedSchema | null = null;
-  if ($in) mixedValid = (mixedValid = yup.mixed()).oneOf($in);
-  if ($nin)
-    mixedValid = (mixedValid || (mixedValid = yup.mixed())).notOneOf($nin);
-  if ($eq) mixedValid = (mixedValid || (mixedValid = yup.mixed())).oneOf([$eq]);
-  if ($ne)
-    mixedValid = (mixedValid || (mixedValid = yup.mixed())).notOneOf([$ne]);
-  if (mixedValid && !validate(mixedValid, val, messages)) return false;
+  function ensureMixedValid() {
+    return mixedValid || (mixedValid = yup.mixed());
+  }
+
+  if ($in) mixedValid = ensureMixedValid().oneOf($in);
+  if ($nin) mixedValid = ensureMixedValid().notOneOf($nin);
+  if ($eq) mixedValid = ensureMixedValid().oneOf([$eq]);
+  if ($ne) mixedValid = ensureMixedValid().notOneOf([$ne]);
+  if (mixedValid) {
+    const schema = multi ? wrapAsMulti(mixedValid, multi) : mixedValid;
+    if (!validate(schema, val, messages)) return false;
+  }
 
   // Other conditions
   const {
@@ -165,6 +171,7 @@ function validateCondRecur(
   return validate(valid, val, messages);
 }
 
+// TODO: remove this function
 export function validateCond(
   type: AllowedFieldTypes,
   multi: AppendableOpts,
@@ -172,6 +179,5 @@ export function validateCond(
   cond: Cond,
   messages: string[] = [],
 ): boolean {
-  if (!validate(getValidatorForType(type), val, messages)) return false;
   return validateCondRecur(type, multi, val, cond, messages);
 }
