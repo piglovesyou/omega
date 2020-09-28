@@ -1,11 +1,30 @@
+import { useCallback, useState, FC } from 'react';
 import Head from 'next/head';
-import { useCallback, useState } from 'react';
-import { FormComponent as SimpleFormComponent } from '../__generated__/simple-example-app/form';
-import { FormComponent as ComplexFormComponent } from '../__generated__/complex-example-app/form';
-import { FormComponent as AllTypesFormComponent } from '../__generated__/all-types-example-app/form';
+import { FormComponent as ExampleFormComponent } from '../__generated__/example-app/form';
+import { FormComponent as AllFieldTypesComponent } from '../__generated__/all-field-types/form';
+
+const Tab: FC<{
+  setSelectedIndex: any;
+  selectedIndex: number;
+  items: string[];
+}> = ({ selectedIndex, setSelectedIndex, items }) => (
+  <div className="omega-form-tab">
+    {items.map((item, i) => (
+      <button
+        key={i}
+        className={`omega-form-tab-item ${
+          selectedIndex === i ? 'omega-form-tab-item--selected' : ''
+        }`}
+        onClick={() => setSelectedIndex(i)}
+      >
+        {item}
+      </button>
+    ))}
+  </div>
+);
 
 export default function Application() {
-  const [selectedIndex, setSelectedIndex] = useState(2);
+  const [selectedIndex, setSelectedIndex] = useState(1);
   const onSubmit = useCallback(
     (values) =>
       alert(`👍\n\nYou posted:\n${JSON.stringify(values, undefined, 2)}`),
@@ -22,36 +41,14 @@ export default function Application() {
       </Head>
       <h1>My form</h1>
 
-      {selectedIndex === 0 && <SimpleFormComponent onSubmit={onSubmit} />}
-      {selectedIndex === 1 && <ComplexFormComponent onSubmit={onSubmit} />}
-      {selectedIndex === 2 && <AllTypesFormComponent onSubmit={onSubmit} />}
+      {selectedIndex === 0 && <ExampleFormComponent onSubmit={onSubmit} />}
+      {selectedIndex === 1 && <AllFieldTypesComponent onSubmit={onSubmit} />}
 
-      <div className="omega-form-tab">
-        <button
-          className={`omega-form-tab-item ${
-            selectedIndex === 0 ? 'omega-form-tab-item--selected' : ''
-          }`}
-          onClick={() => setSelectedIndex(0)}
-        >
-          Simple example
-        </button>
-        <button
-          className={`omega-form-tab-item ${
-            selectedIndex === 1 ? 'omega-form-tab-item--selected' : ''
-          }`}
-          onClick={() => setSelectedIndex(1)}
-        >
-          Complex example
-        </button>
-        <button
-          className={`omega-form-tab-item ${
-            selectedIndex === 2 ? 'omega-form-tab-item--selected' : ''
-          }`}
-          onClick={() => setSelectedIndex(2)}
-        >
-          All field types example
-        </button>
-      </div>
+      <Tab
+        setSelectedIndex={setSelectedIndex}
+        selectedIndex={selectedIndex}
+        items={['Simple example', 'All field types']}
+      />
 
       <hr />
       <p className="my-trailing-text">

@@ -593,5 +593,6 @@ export function genForm(schema: Application) {
 
   // return code;
 
+  // TODO: Remove unused imports, TS errors in generated sources otherwise
   return format(code, { parser: 'typescript' });
 }
