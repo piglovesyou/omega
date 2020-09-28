@@ -1,3 +1,6 @@
+import generate from '@babel/generator';
+import { parseExpression, ParserOptions } from '@babel/parser';
+import { program } from '@babel/types';
 import {
   Application,
   Field,
@@ -8,13 +11,10 @@ import {
   HTMLTextboxLikeField,
   validateCond,
 } from '@omega/core';
+import { pascalCase } from 'pascal-case';
+import { format } from 'prettier';
 import React from 'react';
 import { getFieldValueType } from './ast/field';
-import { program } from '@babel/types';
-import { parseExpression, ParserOptions } from '@babel/parser';
-import generate from '@babel/generator';
-import { format } from 'prettier';
-import { pascalCase } from 'pascal-case';
 import { printError } from './lib/print';
 
 const parserOpts: ParserOptions = { plugins: ['typescript', 'jsx'] };
@@ -102,10 +102,21 @@ function genInputHTMLComponent(field: Field) {
   fieldAttrs.push(`{...props}`);
   inputAttrs.push(`{...props}`);
 
-  const inputHTMLName = (field as FieldAppendable).multi
-    ? 'MultiInputHTML multi={(fieldMap.get(props.name) as FieldAppendable).multi}'
-    : 'SingleInputHTML';
-  function getFieldComponentName() {}
+  // const inputHTMLName = (field as FieldAppendable).multi
+  //   ? 'MultiInputHTML multi={(fieldMap.get(props.name) as FieldAppendable).multi}'
+  //   : 'SingleInputHTML';
+  const inputHTML = {
+    get open() {
+      return (field as FieldAppendable).multi
+        ? 'MultiInputHTML multi={(fieldMap.get(props.name) as FieldAppendable).multi}'
+        : 'SingleInputHTML';
+    },
+    get close() {
+      return (field as FieldAppendable).multi
+        ? 'MultiInputHTML'
+        : 'SingleInputHTML';
+    },
+  };
 
   switch (type) {
     case 'text':
@@ -121,7 +132,7 @@ function genInputHTMLComponent(field: Field) {
     case 'tel':
     case 'range':
       return `<InputFieldComponent ${fieldAttrs.join('\n')}>
-                <${inputHTMLName} component="input" ${inputAttrs.join('\n')} />
+                <${inputHTML.open} component="input" ${inputAttrs.join('\n')} />
               </InputFieldComponent>`;
 
     case 'checkbox': {
@@ -154,15 +165,17 @@ function genInputHTMLComponent(field: Field) {
       const { options } = field as HTMLSelectField;
       const entries = Array.from(Object.entries(options));
       return `<InputFieldComponent ${fieldAttrs.join('\n')} >
-                <${inputHTMLName} component="select" ${inputAttrs.join('\n')}>
-                  ${entries
-                    .map(
-                      ([value, label]) =>
-                        `<option value="${value}">${label}</option>`,
-                    )
-                    .join('\n')}
-                </${inputHTMLName}>
-              </InputFieldComponent>`;
+                   <${inputHTML.open} component="select" ${inputAttrs.join(
+        '\n',
+      )}>
+                     ${entries
+                       .map(
+                         ([value, label]) =>
+                           `<option value="${value}">${label}</option>`,
+                       )
+                       .join('\n')}
+                   </${inputHTML.close}>
+                 </InputFieldComponent>`;
     }
     case 'radio': {
       const { options, field_id } = field as HTMLRadioField;

@@ -195,14 +195,29 @@ fields:
           max: 5
       valid_if:
           $gt: 60
-#    - field_id: feeling
-#      type: select
-#      label: Feeling
-#      options:
-#          na: N/A
-#          happy: Happy
-#          bad: Bad
-#
+
+    - field_id: select
+      type: select
+      label: Select
+      options:
+          na: N/A
+          happy: Happy
+          bad: Bad
+
+    - field_id: select-multi
+      type: select
+      label: Multi select
+      multi:
+          min: 1
+          max: 5
+      options:
+          na: N/A
+          happy: Happy
+          bad: Bad
+      valid_if:
+          $in:
+              - Happy
+              - Bad
 #    - field_id: checkbox
 #      type: checkbox
 #      label: Happy
