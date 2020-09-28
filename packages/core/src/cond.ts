@@ -16,12 +16,14 @@ function wrapAsMulti(v: Schema<any>, multi: AppendableOpts) {
 function getValidatorForType(type: AllowedFieldTypes) {
   switch (type) {
     case 'text':
-    case 'color':
     case 'tel':
     case 'select':
     case 'radio':
     case 'textarea':
       return yup.string();
+
+    case 'color':
+      return yup.string().matches(/^#[0-9a-f]{6}$/);
 
     case 'email':
       return yup.string().email();
@@ -42,9 +44,14 @@ function getValidatorForType(type: AllowedFieldTypes) {
     // case 'week':
     case 'date':
     case 'datetime-local':
-    case 'time':
-    case 'month':
       return yup.date();
+
+    case 'time':
+      return yup.string().matches(/^\d{2}:\d{2}$/);
+
+    case 'month':
+      // TODO: bettter validation?
+      return yup.string();
 
     default:
       throw new Error(`${type} is not a valid field.type.`);
