@@ -1,9 +1,9 @@
 import { CondRoot, FieldAppendable, FieldMap, validateCond } from '@omega/core';
-
+import debounce from 'debounce-promise';
 type Values = { [field_id: string]: any };
 
 export function createValidator(fieldMap: FieldMap) {
-  return (values: Values) => {
+  return debounce((values: Values) => {
     const errors: { [field_id: string]: string } = {};
     for (const [fieldId, field] of fieldMap) {
       const { type, valid_if } = field;
@@ -22,7 +22,7 @@ export function createValidator(fieldMap: FieldMap) {
         errors[fieldId] = messages[0];
     }
     return errors;
-  };
+  }, 100);
 }
 
 export function testCondRoot(

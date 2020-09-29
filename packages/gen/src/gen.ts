@@ -8,7 +8,7 @@ import {
   HTMLCheckboxField,
   HTMLRadioField,
   HTMLSelectField,
-  HTMLTextboxLikeField,
+  HTMLTextboxLikeField, TPrimitive,
   validateCond,
 } from '@omega/core';
 import { pascalCase } from 'pascal-case';
@@ -40,7 +40,17 @@ export function getInitialValue(field: Field) {
   const { multi } = field as FieldAppendable;
 
   // "range" doesn't allow string initialization. XXX: Not sure it's the only exception.
-  const emptyValue = type === 'range' ? 50 : '';
+  let emptyValue: TPrimitive;
+  switch(type) {
+    case 'range':
+      emptyValue = 50
+      break;
+    case 'color':
+      emptyValue = '#000000';
+      break;
+    default:
+      emptyValue = '';
+  }
 
   if (initial_value === undefined) {
     if (!multi) return emptyValue;
