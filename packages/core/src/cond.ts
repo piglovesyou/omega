@@ -1,5 +1,5 @@
-import { MixedSchema, Schema, ValidationError } from 'yup';
 import * as yup from 'yup';
+import { MixedSchema, Schema, ValidationError } from 'yup';
 import { Cond, CondForTypes, MixedCond, NestCond } from './types/cond';
 import { AllowedFieldTypes, AppendableOpts } from './types/field';
 

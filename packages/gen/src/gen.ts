@@ -13,7 +13,6 @@ import {
 } from '@omega/core';
 import { pascalCase } from 'pascal-case';
 import { format } from 'prettier';
-
 import { getFieldValueType } from './ast/field';
 import { printError } from './lib/print';
 
@@ -627,26 +626,26 @@ export function genForm(schema: Application) {
     return (
       <Formik
           validate={validator}
-          initialValues={${ JSON.stringify(
-                  getInitialValues(fields),
-                  undefined,
-                  2,
-              ) } as any}
+          initialValues={${JSON.stringify(
+            getInitialValues(fields),
+            undefined,
+            2,
+          )} as any}
           { ...props }
       >
         <Form className="omega-form">
           <div className="omega-form__fields">
             {children}
-            ${ fields
-                  .map((field) => {
-                    const { field_id, type, label } = field;
-                    return `<${ getComponentName(field_id) }
-                        name="${ field_id }"
-                        type="${ type }"
-                        label="${ label }"
+            ${fields
+              .map((field) => {
+                const { field_id, type, label } = field;
+                return `<${getComponentName(field_id)}
+                        name="${field_id}"
+                        type="${type}"
+                        label="${label}"
                 />`;
-                  })
-                  .join('') }
+              })
+              .join('')}
           </div>
           <div className="omega-form__buttons">
             <button className="omega-form__button omega-form__button--primary" type="submit">Submit</button>

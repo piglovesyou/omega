@@ -1,7 +1,7 @@
-import { useCallback, useState, FC } from 'react';
 import Head from 'next/head';
-import { FormComponent as ExampleFormComponent } from '../__generated__/example-app/form';
+import { FC, useCallback, useState } from 'react';
 import { FormComponent as AllFieldTypesComponent } from '../__generated__/all-field-types/form';
+import { FormComponent as ExampleFormComponent } from '../__generated__/example-app/form';
 
 const Tab: FC<{
   setSelectedIndex: any;

@@ -1,4 +1,4 @@
-import { validateCond, CondRoot, FieldMap, FieldAppendable } from '@omega/core';
+import { CondRoot, FieldAppendable, FieldMap, validateCond } from '@omega/core';
 
 type Values = { [field_id: string]: any };
 

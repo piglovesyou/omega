@@ -1,7 +1,7 @@
 import {
-  tsStringKeyword,
-  tsNumberKeyword,
   tsBooleanKeyword,
+  tsNumberKeyword,
+  tsStringKeyword,
 } from '@babel/types';
 import { AllowedFieldTypes } from '@omega/core';
 
