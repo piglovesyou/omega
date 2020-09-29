@@ -3,19 +3,26 @@ module.exports = {
 
   parser: '@typescript-eslint/parser',
 
-  plugins: ['@typescript-eslint/eslint-plugin', 'prettier', 'jest'],
+  plugins: ['@typescript-eslint/eslint-plugin', 'prettier', 'jest', 'react'],
 
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    "plugin:react/recommended"
   ],
 
   ignorePatterns: [],
 
   env: {
     jest: true,
+  },
+
+  "settings": {
+    "react": {
+      "version": "detect",
+    },
   },
 
   rules: {
@@ -26,5 +33,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-empty-function': 'off',
+    "react/prop-types": "off",
   }
 };
