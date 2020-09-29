@@ -3,7 +3,7 @@
 exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 1`] = `
 "import React, { useState, useEffect } from \\"react\\";
 import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
-import { FieldMap, Field } from \\"@omega/core\\";
+import { FieldMap, Field, FieldAppendable } from \\"@omega/core\\";
 import {
   InputFieldProps,
   createValidator,
@@ -99,7 +99,7 @@ export const FormComponent: React.FC<FormComponentProps> = ({
 exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 2`] = `
 "import React, { useState, useEffect } from \\"react\\";
 import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
-import { FieldMap, Field } from \\"@omega/core\\";
+import { FieldMap, Field, FieldAppendable } from \\"@omega/core\\";
 import {
   InputFieldProps,
   createValidator,
