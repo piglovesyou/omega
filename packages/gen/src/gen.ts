@@ -8,7 +8,8 @@ import {
   HTMLCheckboxField,
   HTMLRadioField,
   HTMLSelectField,
-  HTMLTextboxLikeField, TPrimitive,
+  HTMLTextboxLikeField,
+  TPrimitive,
   validateCond,
 } from '@omega/core';
 import { pascalCase } from 'pascal-case';
@@ -41,9 +42,9 @@ export function getInitialValue(field: Field) {
 
   // "range" doesn't allow string initialization. XXX: Not sure it's the only exception.
   let emptyValue: TPrimitive;
-  switch(type) {
+  switch (type) {
     case 'range':
-      emptyValue = 50
+      emptyValue = 50;
       break;
     case 'color':
       emptyValue = '#000000';
