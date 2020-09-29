@@ -3,7 +3,7 @@ module.exports = {
 
   parser: '@typescript-eslint/parser',
 
-  plugins: ['@typescript-eslint/eslint-plugin', 'prettier', 'jest', 'react', "unused-imports"],
+  plugins: ['@typescript-eslint/eslint-plugin', 'prettier', 'jest', 'react'],
 
   extends: [
     'eslint:recommended',
@@ -34,11 +34,13 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-empty-function': 'off',
     "react/prop-types": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "unused-imports/no-unused-imports-ts": "error",
-    "unused-imports/no-unused-vars-ts": [
-      "warn",
-      { vars: "all", varsIgnorePattern: "^_", args: "after-used", argsIgnorePattern: "^_" },
-    ],
+    // "@typescript-eslint/no-unused-vars": "off",
+    // XXX: For now I try prettier-plugin-organize-imports,
+    // instead of eslint-plugin-unused-imports.
+    // "unused-imports/no-unused-imports-ts": "error",
+    // "unused-imports/no-unused-vars-ts": [
+    //   "warn",
+    //   { vars: "all", varsIgnorePattern: "^_", args: "after-used", argsIgnorePattern: "^_" },
+    // ],
   }
 };
