@@ -23,6 +23,7 @@
     "make-dir": "^3.1.0",
     "pascal-case": "^3.1.1",
     "prettier": "^2.1.1",
+    "prettier-plugin-organize-imports": "^1.1.1",
     "string-env-interpolation": "^1.0.1",
     "yaml": "^1.10.0",
     "yargs": "^16.0.3"

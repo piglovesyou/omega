@@ -1,13 +1,13 @@
-import { join } from 'path';
 import { promises } from 'fs';
 import makeDir from 'make-dir';
-import { promisify } from 'util';
+import { join } from 'path';
 import _rimraf from 'rimraf';
 import {
-  PartialArgs,
-  getProgramFromFiles,
   generateSchema,
+  getProgramFromFiles,
+  PartialArgs,
 } from 'typescript-json-schema';
+import { promisify } from 'util';
 
 const rimraf = promisify(_rimraf);
 const { writeFile } = promises;

@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 1`] = `
-"import { InputFieldProps } from \\"@omega/runtime\\";
-import React, { useState, useEffect } from \\"react\\";
-import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
-import { FieldMap, Field } from \\"@omega/core\\";
+"import { Field, FieldMap } from \\"@omega/core\\";
 import {
   createValidator,
-  testCondRoot,
   InputFieldComponent,
+  InputFieldProps,
+  SingleInputHTML,
 } from \\"@omega/runtime\\";
+import { Form, Formik, FormikConfig } from \\"formik\\";
+import React, { useMemo } from \\"react\\";
 
 /* Form value type */
 export type FieldValueTypes = {
@@ -39,12 +39,20 @@ export const fieldMap: FieldMap = new Map<string, Field>([
 
 /* Component function for \\"name\\" */
 export const NameFieldComponent: React.FC<InputFieldProps> = (props) => {
-  return <InputFieldComponent component=\\"input\\" {...props} />;
+  return (
+    <InputFieldComponent {...props}>
+      <SingleInputHTML component=\\"input\\" {...props} />
+    </InputFieldComponent>
+  );
 };
 
 /* Component function for \\"age\\" */
 export const AgeFieldComponent: React.FC<InputFieldProps> = (props) => {
-  return <InputFieldComponent component=\\"input\\" {...props} />;
+  return (
+    <InputFieldComponent {...props}>
+      <SingleInputHTML component=\\"input\\" {...props} />
+    </InputFieldComponent>
+  );
 };
 
 /* Form component */
@@ -55,47 +63,51 @@ export type FormComponentProps = Omit<
 export const FormComponent: React.FC<FormComponentProps> = ({
   children,
   ...props
-}) => (
-  <Formik
-    validate={createValidator(fieldMap)}
-    initialValues={
-      {
-        name: \\"\\",
-        age: \\"\\",
-      } as any
-    }
-    {...props}
-  >
-    <Form className=\\"omega-form\\">
-      <div className=\\"omega-form__fields\\">
-        {children}
-        <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
-        <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
-      </div>
-      <div className=\\"omega-form__buttons\\">
-        <button
-          className=\\"omega-form__button omega-form__button--primary\\"
-          type=\\"submit\\"
-        >
-          Submit
-        </button>
-      </div>
-    </Form>
-  </Formik>
-);
+}) => {
+  const validator = useMemo(() => createValidator(fieldMap), []);
+  return (
+    <Formik
+      validate={validator}
+      initialValues={
+        {
+          name: \\"\\",
+          age: \\"\\",
+        } as any
+      }
+      {...props}
+    >
+      <Form className=\\"omega-form\\">
+        <div className=\\"omega-form__fields\\">
+          {children}
+          <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
+          <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
+        </div>
+        <div className=\\"omega-form__buttons\\">
+          <button
+            className=\\"omega-form__button omega-form__button--primary\\"
+            type=\\"submit\\"
+          >
+            Submit
+          </button>
+        </div>
+      </Form>
+    </Formik>
+  );
+};
 "
 `;
 
 exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 2`] = `
-"import { InputFieldProps } from \\"@omega/runtime\\";
-import React, { useState, useEffect } from \\"react\\";
-import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
-import { FieldMap, Field } from \\"@omega/core\\";
+"import { Field, FieldMap } from \\"@omega/core\\";
 import {
   createValidator,
-  testCondRoot,
   InputFieldComponent,
+  InputFieldProps,
+  SingleInputHTML,
+  testCondRoot,
 } from \\"@omega/runtime\\";
+import { Form, Formik, FormikConfig, useFormikContext } from \\"formik\\";
+import React, { useEffect, useMemo, useState } from \\"react\\";
 
 /* Form value type */
 export type FieldValueTypes = {
@@ -141,7 +153,11 @@ export const fieldMap: FieldMap = new Map<string, Field>([
 
 /* Component function for \\"name\\" */
 export const NameFieldComponent: React.FC<InputFieldProps> = (props) => {
-  return <InputFieldComponent component=\\"input\\" required {...props} />;
+  return (
+    <InputFieldComponent required {...props}>
+      <SingleInputHTML component=\\"input\\" {...props} />
+    </InputFieldComponent>
+  );
 };
 
 /* Component function for \\"age\\" */
@@ -171,12 +187,9 @@ export const AgeFieldComponent: React.FC<InputFieldProps> = (props) => {
   );
   if (!shown) return <></>;
   return (
-    <InputFieldComponent
-      component=\\"input\\"
-      disabled={disabled}
-      required
-      {...props}
-    />
+    <InputFieldComponent required {...props}>
+      <SingleInputHTML component=\\"input\\" disabled={disabled} {...props} />
+    </InputFieldComponent>
   );
 };
 
@@ -188,33 +201,85 @@ export type FormComponentProps = Omit<
 export const FormComponent: React.FC<FormComponentProps> = ({
   children,
   ...props
-}) => (
-  <Formik
-    validate={createValidator(fieldMap)}
-    initialValues={
-      {
-        name: \\"\\",
-        age: \\"\\",
-      } as any
-    }
-    {...props}
-  >
-    <Form className=\\"omega-form\\">
-      <div className=\\"omega-form__fields\\">
-        {children}
-        <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
-        <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
-      </div>
-      <div className=\\"omega-form__buttons\\">
-        <button
-          className=\\"omega-form__button omega-form__button--primary\\"
-          type=\\"submit\\"
-        >
-          Submit
-        </button>
-      </div>
-    </Form>
-  </Formik>
-);
+}) => {
+  const validator = useMemo(() => createValidator(fieldMap), []);
+  return (
+    <Formik
+      validate={validator}
+      initialValues={
+        {
+          name: \\"\\",
+          age: \\"\\",
+        } as any
+      }
+      {...props}
+    >
+      <Form className=\\"omega-form\\">
+        <div className=\\"omega-form__fields\\">
+          {children}
+          <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
+          <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
+        </div>
+        <div className=\\"omega-form__buttons\\">
+          <button
+            className=\\"omega-form__button omega-form__button--primary\\"
+            type=\\"submit\\"
+          >
+            Submit
+          </button>
+        </div>
+      </Form>
+    </Formik>
+  );
+};
 "
 `;
+
+exports[`getInitialValue {"initial_value":"hello","multi":{"min":3}} 1`] = `
+Array [
+  "hello",
+  "hello",
+  "hello",
+]
+`;
+
+exports[`getInitialValue {"initial_value":"hello","multi":true} 1`] = `
+Array [
+  "hello",
+]
+`;
+
+exports[`getInitialValue {"initial_value":"hello"} 1`] = `"hello"`;
+
+exports[`getInitialValue {"initial_value":["a","b"],"multi":{"min":3}} 1`] = `
+Array [
+  "a",
+  "b",
+  "",
+]
+`;
+
+exports[`getInitialValue {"initial_value":["a","b"],"multi":true} 1`] = `
+Array [
+  "a",
+  "b",
+]
+`;
+
+exports[`getInitialValue {"initial_value":["a","b"]} 1`] = `[Error: "undefined" is wrongly configured. initial_value can be an array only when it is multi value field.]`;
+
+exports[`getInitialValue {"multi":{"min":3}} 1`] = `
+Array [
+  "",
+  "",
+  "",
+]
+`;
+
+exports[`getInitialValue {"multi":true} 1`] = `
+Array [
+  "",
+]
+`;
+
+exports[`getInitialValue {} 1`] = `""`;

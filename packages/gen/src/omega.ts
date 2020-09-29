@@ -1,7 +1,7 @@
-import yargs from 'yargs';
-import makeDir from 'make-dir';
 import { promises } from 'fs';
+import makeDir from 'make-dir';
 import { join } from 'path';
+import yargs from 'yargs';
 import { genForm } from './gen';
 import { loadApplicationSchema } from './load';
 

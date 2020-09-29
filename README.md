@@ -77,9 +77,9 @@ as a documentation.
     -   [x] url
     -   [x] date
     -   [x] select
-    -   [ ] radio
-    -   [ ] textarea
-    -   [ ] multiple values of the primitive types
+    -   [x] radio
+    -   [x] textarea
+    -   [x] multiple values of the primitive types
     -   [ ] select value from another applications
         -   [ ] filter, sort, aggregate
 
