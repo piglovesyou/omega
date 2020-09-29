@@ -1,17 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 1`] = `
-"import React, { useState, useEffect } from \\"react\\";
-import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
-import { FieldMap, Field, FieldAppendable } from \\"@omega/core\\";
+"import { Field, FieldMap } from \\"@omega/core\\";
 import {
-  InputFieldProps,
   createValidator,
-  testCondRoot,
-  SingleInputHTML,
-  MultiInputHTML,
   InputFieldComponent,
+  InputFieldProps,
+  SingleInputHTML,
 } from \\"@omega/runtime\\";
+import { Form, Formik, FormikConfig } from \\"formik\\";
+import React, { useMemo } from \\"react\\";
 
 /* Form value type */
 export type FieldValueTypes = {
@@ -65,49 +63,51 @@ export type FormComponentProps = Omit<
 export const FormComponent: React.FC<FormComponentProps> = ({
   children,
   ...props
-}) => (
-  <Formik
-    validate={createValidator(fieldMap)}
-    initialValues={
-      {
-        name: \\"\\",
-        age: \\"\\",
-      } as any
-    }
-    {...props}
-  >
-    <Form className=\\"omega-form\\">
-      <div className=\\"omega-form__fields\\">
-        {children}
-        <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
-        <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
-      </div>
-      <div className=\\"omega-form__buttons\\">
-        <button
-          className=\\"omega-form__button omega-form__button--primary\\"
-          type=\\"submit\\"
-        >
-          Submit
-        </button>
-      </div>
-    </Form>
-  </Formik>
-);
+}) => {
+  const validator = useMemo(() => createValidator(fieldMap), []);
+  return (
+    <Formik
+      validate={validator}
+      initialValues={
+        {
+          name: \\"\\",
+          age: \\"\\",
+        } as any
+      }
+      {...props}
+    >
+      <Form className=\\"omega-form\\">
+        <div className=\\"omega-form__fields\\">
+          {children}
+          <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
+          <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
+        </div>
+        <div className=\\"omega-form__buttons\\">
+          <button
+            className=\\"omega-form__button omega-form__button--primary\\"
+            type=\\"submit\\"
+          >
+            Submit
+          </button>
+        </div>
+      </Form>
+    </Formik>
+  );
+};
 "
 `;
 
 exports[`genForm {"application_id": "user", "fields": [Array], "label": "User", "version": "1.0.0"} 2`] = `
-"import React, { useState, useEffect } from \\"react\\";
-import { Formik, Form, useFormikContext, FormikConfig } from \\"formik\\";
-import { FieldMap, Field, FieldAppendable } from \\"@omega/core\\";
+"import { Field, FieldMap } from \\"@omega/core\\";
 import {
-  InputFieldProps,
   createValidator,
-  testCondRoot,
-  SingleInputHTML,
-  MultiInputHTML,
   InputFieldComponent,
+  InputFieldProps,
+  SingleInputHTML,
+  testCondRoot,
 } from \\"@omega/runtime\\";
+import { Form, Formik, FormikConfig, useFormikContext } from \\"formik\\";
+import React, { useEffect, useMemo, useState } from \\"react\\";
 
 /* Form value type */
 export type FieldValueTypes = {
@@ -201,34 +201,37 @@ export type FormComponentProps = Omit<
 export const FormComponent: React.FC<FormComponentProps> = ({
   children,
   ...props
-}) => (
-  <Formik
-    validate={createValidator(fieldMap)}
-    initialValues={
-      {
-        name: \\"\\",
-        age: \\"\\",
-      } as any
-    }
-    {...props}
-  >
-    <Form className=\\"omega-form\\">
-      <div className=\\"omega-form__fields\\">
-        {children}
-        <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
-        <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
-      </div>
-      <div className=\\"omega-form__buttons\\">
-        <button
-          className=\\"omega-form__button omega-form__button--primary\\"
-          type=\\"submit\\"
-        >
-          Submit
-        </button>
-      </div>
-    </Form>
-  </Formik>
-);
+}) => {
+  const validator = useMemo(() => createValidator(fieldMap), []);
+  return (
+    <Formik
+      validate={validator}
+      initialValues={
+        {
+          name: \\"\\",
+          age: \\"\\",
+        } as any
+      }
+      {...props}
+    >
+      <Form className=\\"omega-form\\">
+        <div className=\\"omega-form__fields\\">
+          {children}
+          <NameFieldComponent name=\\"name\\" type=\\"text\\" label=\\"Name\\" />
+          <AgeFieldComponent name=\\"age\\" type=\\"number\\" label=\\"Age\\" />
+        </div>
+        <div className=\\"omega-form__buttons\\">
+          <button
+            className=\\"omega-form__button omega-form__button--primary\\"
+            type=\\"submit\\"
+          >
+            Submit
+          </button>
+        </div>
+      </Form>
+    </Formik>
+  );
+};
 "
 `;
 
