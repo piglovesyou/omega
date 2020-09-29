@@ -249,6 +249,17 @@ export function genForm(schema: Application) {
           type: 'ImportSpecifier',
           imported: {
             type: 'Identifier',
+            name: 'useMemo',
+          },
+          local: {
+            type: 'Identifier',
+            name: 'useMemo',
+          },
+        },
+        {
+          type: 'ImportSpecifier',
+          imported: {
+            type: 'Identifier',
             name: 'useState',
           },
           local: {
@@ -611,36 +622,39 @@ export function genForm(schema: Application) {
             },
             // TODO: Use field-level validation, it seems faster
             init: expr(`
-({children, ...props}) => (
-    <Formik
-        validate={createValidator(fieldMap)}
-        initialValues={${JSON.stringify(
-          getInitialValues(fields),
-          undefined,
-          2,
-        )} as any}
-        { ...props }
-    >
-      <Form className="omega-form">
-        <div className="omega-form__fields">
-          {children}
-          ${fields
-            .map((field) => {
-              const { field_id, type, label } = field;
-              return `<${getComponentName(field_id)}
-                      name="${field_id}"
-                      type="${type}"
-                      label="${label}"
-              />`;
-            })
-            .join('')}
-        </div>
-        <div className="omega-form__buttons">
-          <button className="omega-form__button omega-form__button--primary" type="submit">Submit</button>
-        </div>
-      </Form>
-    </Formik>
-)
+({children, ...props}) => {
+    const validator = useMemo(() => createValidator(fieldMap), []); 
+    return (
+      <Formik
+          validate={validator}
+          initialValues={${ JSON.stringify(
+                  getInitialValues(fields),
+                  undefined,
+                  2,
+              ) } as any}
+          { ...props }
+      >
+        <Form className="omega-form">
+          <div className="omega-form__fields">
+            {children}
+            ${ fields
+                  .map((field) => {
+                    const { field_id, type, label } = field;
+                    return `<${ getComponentName(field_id) }
+                        name="${ field_id }"
+                        type="${ type }"
+                        label="${ label }"
+                />`;
+                  })
+                  .join('') }
+          </div>
+          <div className="omega-form__buttons">
+            <button className="omega-form__button omega-form__button--primary" type="submit">Submit</button>
+          </div>
+        </Form>
+      </Formik>
+    )
+}
             `),
           },
         ],
