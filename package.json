@@ -24,8 +24,7 @@
     "**/*.{ts,tsx}": [
       "yarn fix-js",
       "git add --force"
-    ],
-    "*.{yml,graphql,graphqls}": [
+    ], "*.{yml,graphql,graphqls}": [
       "yarn fix-nonjs",
       "git add --force"
     ],
