@@ -1,6 +1,6 @@
 import { AppendableOpts } from '@omega/core';
-import React, { InputHTMLAttributes, FC, useState, useMemo } from 'react';
-import { FieldArray, useField, useFormikContext } from 'formik';
+import React, { InputHTMLAttributes, FC, useMemo } from 'react';
+import { FieldArray, useField } from 'formik';
 
 export type InputHTMLAttributesStrict = InputHTMLAttributes<
   HTMLInputElement

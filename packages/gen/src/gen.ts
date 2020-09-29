@@ -13,7 +13,7 @@ import {
 } from '@omega/core';
 import { pascalCase } from 'pascal-case';
 import { format } from 'prettier';
-import React from 'react';
+
 import { getFieldValueType } from './ast/field';
 import { printError } from './lib/print';
 
@@ -31,10 +31,10 @@ function arr(n: number) {
   return Array.from(Array(n));
 }
 
-function hasMin(field: Field): boolean {
-  const { multi } = field as FieldAppendable;
-  return typeof multi === 'object' && typeof multi.min === 'number';
-}
+// function hasMin(field: Field): boolean {
+//   const { multi } = field as FieldAppendable;
+//   return typeof multi === 'object' && typeof multi.min === 'number';
+// }
 
 export function getInitialValue(field: Field) {
   const { initial_value, type } = field;
@@ -58,7 +58,6 @@ export function getInitialValue(field: Field) {
         ),
       );
     if (typeof multi === 'object' && typeof multi.min === 'number') {
-      const rv: any[] = [];
       return arr(multi.min).map((_, i) => {
         const initialValue = initial_value[i];
         return initialValue !== undefined ? initialValue : emptyValue;
@@ -69,7 +68,7 @@ export function getInitialValue(field: Field) {
 
   if (!multi) return initial_value;
   if (typeof multi === 'object' && typeof multi.min === 'number')
-    return arr(multi.min).map((_, i) => initial_value);
+    return arr(multi.min).map(() => initial_value);
   return [initial_value];
 }
 
