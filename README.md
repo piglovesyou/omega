@@ -113,7 +113,7 @@ as a documentation.
 
 ## Next.js example
 
--   Demonstration: <https://omega.vercel.app/>
+-   Demonstration: <https://omega-example.vercel.app/>
 -   [The source](https://github.com/piglovesyou/omega/tree/master/examples/nextjs-example)
 
 Schema:
