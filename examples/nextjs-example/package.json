@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "gen": "omega schema/**",
+    "gen": "omega 'schema/**/*.yml'",
     "dev": "next",
     "build": "yarn gen && next build",
     "start": "next start",

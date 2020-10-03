@@ -1,4 +1,5 @@
 import { promises } from 'fs';
+import globby from 'globby';
 import makeDir from 'make-dir';
 import { join } from 'path';
 import yargs from 'yargs';
@@ -16,7 +17,7 @@ async function main() {
   const { outDir, _: schemaPaths } = argv;
   const cwd = process.cwd();
 
-  for (const schemaPath of schemaPaths) {
+  for (const schemaPath of await globby(schemaPaths, { cwd })) {
     const schema = await loadApplicationSchema({ cwd, schemaPath });
     const { application_id } = schema;
     const dir = join(cwd, outDir, application_id);
